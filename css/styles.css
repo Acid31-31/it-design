@@ -16,6 +16,7 @@
     --border: #1b3853;
     --green: #31c95b;
     --purple: #a45cff;
+    --gold: #e8b84a;
 }
 
 html {
@@ -394,8 +395,28 @@ nav a[aria-current="page"] {
 
 .programs {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+        "rohr dok material"
+        ". individuell .";
+    gap: 16px;
+    align-items: stretch;
+}
+
+#programm-rohr {
+    grid-area: rohr;
+}
+
+#programm-auftrag {
+    grid-area: dok;
+}
+
+#programm-material {
+    grid-area: material;
+}
+
+#programm-individuell {
+    grid-area: individuell;
 }
 
 .card {
@@ -407,8 +428,11 @@ nav a[aria-current="page"] {
         );
     border: 1px solid #24415c;
     border-radius: 10px;
-    padding: 22px;
+    padding: 16px;
     transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
 }
 
 .card:hover {
@@ -442,6 +466,11 @@ nav a[aria-current="page"] {
     background: var(--purple);
 }
 
+.card.gold .card-icon {
+    background: var(--gold);
+    color: #1a1408;
+}
+
 .card h3 {
     font-size: 19px;
 }
@@ -459,15 +488,24 @@ nav a[aria-current="page"] {
     color: #bd83ff;
 }
 
+.card.gold .card-subtitle {
+    color: #f0c96a;
+}
+
+.card.gold {
+    border-color: #6a5420;
+    box-shadow: 0 0 0 1px rgba(232, 184, 74, 0.18);
+}
+
 .card-description {
     color: #adbdcc;
     font-size: 13px;
-    min-height: 70px;
+    margin-bottom: 0;
 }
 
 .program-preview {
-    height: 130px;
-    margin: 17px 0;
+    height: 110px;
+    margin: 14px 0;
     padding: 15px;
     overflow: hidden;
     background: #040a11;
@@ -529,16 +567,23 @@ nav a[aria-current="page"] {
     background: var(--purple);
 }
 
+.card.gold .check-list span::before {
+    background: var(--gold);
+    color: #1a1408;
+}
+
 .card-buttons {
     display: flex;
     gap: 8px;
-    margin-top: 18px;
+    margin-top: auto;
+    padding-top: 16px;
 }
 
 .card-buttons .button {
     flex: 1;
-    padding: 9px 12px;
-    font-size: 12px;
+    padding: 9px 8px;
+    font-size: 11px;
+    white-space: nowrap;
 }
 
 /* =========================
@@ -918,10 +963,6 @@ footer {
         transform: none;
     }
 
-    .programs {
-        grid-template-columns: 1fr;
-    }
-
     .benefits {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -958,6 +999,15 @@ footer {
 
     .benefits {
         grid-template-columns: 1fr;
+    }
+
+    .programs {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "rohr"
+            "dok"
+            "individuell"
+            "material";
     }
 
     .footer-grid {
