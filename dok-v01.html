@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOK-V01 – Auftragsbearbeitung | IT Design</title>
+    <meta name="description" content="DOK-V01 sortiert Zeichnungs-PDFs anhand einer Excel-Bestellliste, setzt Wasserzeichen und führt alles zu einer Gesamt-PDF zusammen.">
+    <meta name="theme-color" content="#030913">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+<header>
+    <div class="container nav">
+        <a href="index.html#start" class="logo">
+            <div class="logo-symbol">IT</div>
+            <div>
+                <div class="logo-text">IT Design</div>
+                <span class="logo-sub">INDIVIDUELLE IT-LÖSUNGEN</span>
+            </div>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="site-nav">
+            <a href="index.html#start">Startseite</a>
+            <a href="index.html#programme">Meine Lösungen</a>
+            <a href="index.html#ueber-mich">Über mich</a>
+            <a href="index.html#vorteile">Vorteile</a>
+            <a href="index.html#kontakt">Kontakt</a>
+        </nav>
+
+        <a href="index.html#kontakt" class="button nav-cta">Kontakt aufnehmen</a>
+    </div>
+</header>
+
+<main id="inhalt">
+    <section class="container product-hero">
+        <div>
+            <div class="eyebrow">Lösung · Auftragsbearbeitung</div>
+            <img class="product-logo" src="images/dok-v01/logo.png" alt="DOK-V01 – Smart. Sorted. Done.">
+            <h1>Kundenaufträge aus PDF und Excel automatisch vorbereiten.</h1>
+            <p>
+                DOK-V01 ist eine Windows-App für die Fertigung: Zeichnungs-PDFs und eine Excel-Bestellliste
+                werden geladen, sortiert, umbenannt und optional mit Wasserzeichen versehen.
+                Danach liegt eine druckfertige Gesamt-PDF bereit – offline am Arbeitsplatz, ohne Cloud.
+            </p>
+            <div class="hero-buttons">
+                <a href="#screenshots" class="button">Screenshots ansehen</a>
+                <a href="index.html#kontakt" class="button button-outline">Lösung anfragen</a>
+            </div>
+        </div>
+        <button
+            class="gallery-item"
+            type="button"
+            data-lightbox
+            data-full="images/dok-v01/hauptfenster.jpg"
+            data-caption="Hauptfenster: Dateien per Drag &amp; Drop laden, dann sortieren und zusammenfügen.">
+            <img src="images/dok-v01/hauptfenster.jpg" alt="Hauptfenster von DOK-V01 mit Drag-and-Drop-Bereich">
+            <span class="shot-caption">Hauptfenster der App</span>
+        </button>
+    </section>
+
+    <section class="section container">
+        <div class="section-heading">
+            <div class="eyebrow">Was die App leistet</div>
+            <h2>Vom Kundenauftrag zur fertigen Mappe</h2>
+        </div>
+        <div class="feature-grid">
+            <article class="feature-item">
+                <h3>Dateien laden</h3>
+                <p>PDF, Excel oder ZIP per Drag &amp; Drop ins Fenster ziehen. Die App erkennt Bestellliste und Zeichnungen automatisch.</p>
+            </article>
+            <article class="feature-item">
+                <h3>Sortieren &amp; umbenennen</h3>
+                <p>Zeichnungen werden der Excel-Reihenfolge zugeordnet und als 01_, 02_, 03_ … benannt – ohne manuelles Umsortieren.</p>
+            </article>
+            <article class="feature-item">
+                <h3>Wasserzeichen</h3>
+                <p>Optional direkt auf die Zeichnung: Menge, Liefertermin, Lieferort, Auftragsnummer und weitere Auftragsdaten.</p>
+            </article>
+            <article class="feature-item">
+                <h3>Prüfen &amp; zusammenfügen</h3>
+                <p>Bestell-PDF mit Excel und Zeichnungen abgleichen, Abweichungen erkennen und alles als Gesamt-PDF für Druck und Vorschau ausgeben.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section container" id="screenshots">
+        <div class="section-heading">
+            <div class="eyebrow">Einblick in die App</div>
+            <h2>Screenshots</h2>
+        </div>
+        <div class="gallery">
+            <button
+                class="gallery-item"
+                type="button"
+                data-lightbox
+                data-full="images/dok-v01/hauptfenster.jpg"
+                data-caption="Dateien hier reinziehen: PDF, Excel oder ZIP. Danach Sortieren &amp; Umbenennen oder Zusammenfügen.">
+                <img src="images/dok-v01/hauptfenster.jpg" alt="DOK-V01 Hauptfenster mit Drop-Zone für PDF und Excel">
+                <span class="shot-caption">Hauptfenster – Dateien per Maus reinziehen</span>
+            </button>
+            <button
+                class="gallery-item"
+                type="button"
+                data-lightbox
+                data-full="images/dok-v01/workflow.jpg"
+                data-caption="Eingang: unsortierte Kunden-PDFs plus Excel. Ausgang: nummerierte Dateien in der richtigen Reihenfolge.">
+                <img src="images/dok-v01/workflow.jpg" alt="Workflow von unsortierten Kundendateien zu sortierten Auftrags-PDFs">
+                <span class="shot-caption">Ablauf – unsortiert rein, sortiert raus</span>
+            </button>
+            <button
+                class="gallery-item"
+                type="button"
+                data-lightbox
+                data-full="images/dok-v01/wasserzeichen.jpg"
+                data-caption="Auf der Zeichnung stehen danach Menge, Liefertermin, Lieferort und Auftragsnummer.">
+                <img src="images/dok-v01/wasserzeichen.jpg" alt="Technische Zeichnung mit automatisch gesetzten Wasserzeichen">
+                <span class="shot-caption">Wasserzeichen auf der Zeichnung</span>
+            </button>
+            <button
+                class="gallery-item"
+                type="button"
+                data-lightbox
+                data-full="images/dok-v01/pruef-pdf.jpg"
+                data-caption="Excel-Bestellung und Bestell-PDF werden verglichen. Abweichungen wie ein anderer Liefertermin werden markiert.">
+                <img src="images/dok-v01/pruef-pdf.jpg" alt="Prüfansicht: Excel-Bestellung im Vergleich zur Bestell-PDF">
+                <span class="shot-caption">Prüf-PDF – Abweichungen sofort erkennen</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="section container" id="kontakt">
+        <div class="contact-box">
+            <div class="eyebrow">Nächster Schritt</div>
+            <h2>DOK-V01 im Betrieb ansehen?</h2>
+            <p>
+                Die App läuft lokal unter Windows. Wenn der Ablauf zu Ihren Kundenunterlagen passt,
+                richten wir ihn auf den Arbeitsplatz ein.
+            </p>
+            <a href="mailto:info@alexander-hoelzer.de?subject=DOK-V01" class="button">Kontakt aufnehmen</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-column">
+            <h3>IT Design</h3>
+            <p>Individuelle IT-Lösungen für die Praxis.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Kontakt</h3>
+            <p>Alexander Hölzer</p>
+            <p><a href="tel:+491708333999">+49 170 833 3999</a></p>
+            <p><a href="mailto:info@alexander-hoelzer.de">info@alexander-hoelzer.de</a></p>
+        </div>
+        <div class="footer-column">
+            <h3>Schnellzugriff</h3>
+            <a href="index.html#start">Startseite</a>
+            <a href="index.html#programme">Meine Lösungen</a>
+            <a href="dok-v01.html">DOK-V01</a>
+        </div>
+        <div class="footer-column">
+            <h3>Rechtliches</h3>
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+        </div>
+    </div>
+    <div class="container copyright">
+        © 2026 – IT Design. Alle Rechte vorbehalten.
+    </div>
+</footer>
+
+<div class="lightbox" data-lightbox-overlay hidden>
+    <button class="lightbox-close" type="button" data-lightbox-close aria-label="Schließen">×</button>
+    <div>
+        <img alt="">
+        <p data-lightbox-caption></p>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
