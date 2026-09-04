@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 120" role="img" aria-label="Rohre Zuschnitt  Cut. Plan. Done.">
+  <rect width="620" height="120" fill="#0A121A"/>
+  <polygon points="60,8 106,35 106,85 60,112 14,85 14,35" fill="none" stroke="#46D1A3" stroke-width="6"/>
+  <text x="60" y="78" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="50" font-weight="800" fill="#ffffff">R</text>
+  <text x="132" y="58" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="32" font-weight="800" fill="#ffffff">ROHRE ZUSCHNITT</text>
+  <text x="132" y="92" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#46D1A3" letter-spacing="4">CUT. PLAN. DONE.</text>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Rohre Zuschnitt">
+  <rect width="120" height="120" rx="22" fill="#0A121A"/>
+  <polygon points="60,10 104,35 104,85 60,110 16,85 16,35" fill="none" stroke="#46D1A3" stroke-width="6"/>
+  <text x="60" y="78" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="52" font-weight="800" fill="#ffffff">R</text>
+</svg>

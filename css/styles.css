@@ -761,8 +761,9 @@ nav a[aria-current="page"] {
 }
 
 .product-logo {
-    width: min(280px, 70%);
+    width: min(420px, 92%);
     margin-bottom: 22px;
+    display: block;
 }
 
 .product-logo.icon {
