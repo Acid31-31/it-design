@@ -456,6 +456,19 @@ nav a[aria-current="page"] {
     place-items: center;
     background: var(--blue);
     font-size: 21px;
+    overflow: hidden;
+}
+
+.card-icon.has-logo {
+    background: #0a121a;
+    padding: 0;
+}
+
+.card-icon.has-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .card.green .card-icon {
