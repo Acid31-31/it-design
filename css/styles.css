@@ -99,6 +99,8 @@ header {
     font-weight: 900;
     color: var(--blue);
     font-style: italic;
+    letter-spacing: -1px;
+    line-height: 1;
 }
 
 .logo-text {
