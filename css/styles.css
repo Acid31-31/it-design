@@ -398,7 +398,7 @@ nav a[aria-current="page"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-areas:
         "rohr dok material"
-        "tesla ecomark individuell";
+        "kunde1 kunde2 individuell";
     gap: 16px;
     align-items: stretch;
 }
@@ -419,12 +419,12 @@ nav a[aria-current="page"] {
     grid-area: individuell;
 }
 
-#programm-tesla {
-    grid-area: tesla;
+#programm-kunde-x01 {
+    grid-area: kunde1;
 }
 
-#programm-ecomark {
-    grid-area: ecomark;
+#programm-kunde-x02 {
+    grid-area: kunde2;
 }
 
 .program-preview-video {
@@ -1069,8 +1069,8 @@ footer {
         grid-template-areas:
             "rohr"
             "dok"
-            "tesla"
-            "ecomark"
+            "kunde1"
+            "kunde2"
             "individuell"
             "material";
     }
