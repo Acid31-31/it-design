@@ -398,7 +398,8 @@ nav a[aria-current="page"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-areas:
         "rohr dok material"
-        "kunde1 kunde2 individuell";
+        "zeitstempel kunde1 kunde2"
+        "individuell . .";
     gap: 16px;
     align-items: stretch;
 }
@@ -413,6 +414,10 @@ nav a[aria-current="page"] {
 
 #programm-material {
     grid-area: material;
+}
+
+#programm-zeitstempel {
+    grid-area: zeitstempel;
 }
 
 #programm-individuell {
@@ -1069,10 +1074,11 @@ footer {
         grid-template-areas:
             "rohr"
             "dok"
+            "material"
+            "zeitstempel"
             "kunde1"
             "kunde2"
-            "individuell"
-            "material";
+            "individuell";
     }
 
     .footer-grid {

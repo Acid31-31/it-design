@@ -3,3 +3,6 @@ Desktop.ini
 .DS_Store
 *.log
 videos/_frames/
+videos/_record/
+videos/*-raw.webm
+tools/
