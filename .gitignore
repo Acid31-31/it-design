@@ -4,5 +4,6 @@ Desktop.ini
 *.log
 videos/_frames/
 videos/_record/
+videos/_clips/
 videos/*-raw.webm
 tools/

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeitstempel – Digitale Arbeitszeiterfassung | IT Design</title>
-    <meta name="description" content="Video zur Stempeluhr Zeitstempel: Werkstatt, Chef-PC, Mitarbeiter und Excel/TaxMetall am Rechner.">
+    <title>Zeiterfassung – Zeitstempel | IT Design</title>
+    <meta name="description" content="Digitale Zeiterfassung: Stempeluhr in der Werkstatt, Chef-PC mit allen Funktionen, Excel und TaxMetall. Bilder und Videos der App.">
     <meta name="theme-color" content="#030913">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/styles.css">
@@ -41,27 +41,143 @@
 </header>
 
 <main id="inhalt">
-    <section class="container product-hero product-hero-video">
+    <section class="container product-hero product-hero-video" id="zeiterfassung">
         <div>
-            <div class="eyebrow">Lösung · Arbeitszeit</div>
-            <h1>Zeitstempel im Video.</h1>
+            <div class="eyebrow">Lösung · Zeiterfassung</div>
+            <h1>Zeitstempel – Stempeluhr und Chef-PC.</h1>
             <p>
-                Stempeluhr in der Werkstatt, Chef-PC mit allen Mitarbeitern,
-                Excel und TaxMetall automatisch. Das Video zeigt die Bedienung am Rechner.
+                Mitarbeiter stempeln in der Werkstatt nur mit dem Chip.
+                Auf dem Chef-PC sieht man alle Personen, den Monat, Urlaub und Überstunden.
+                Jede Stempelung wird automatisch in die Excel geschrieben – bereit für TaxMetall.
             </p>
+            <div class="hero-buttons">
+                <a href="#videos" class="button">Videos ansehen</a>
+                <a href="#funktionen" class="button button-outline">Alle Funktionen</a>
+            </div>
         </div>
         <video class="program-video" controls playsinline preload="metadata" poster="images/zeitstempel/stempeluhr.jpg">
-            <source src="videos/zeitstempel-praesentation.mp4?v=3" type="video/mp4">
+            <source src="videos/zeitstempel-praesentation.mp4?v=4" type="video/mp4">
             Ihr Browser kann das Video nicht abspielen.
         </video>
+    </section>
+
+    <section class="section container">
+        <div class="section-heading">
+            <div class="eyebrow">Was die App leistet</div>
+            <h2>Zwei Bildschirme, ein Ablauf</h2>
+        </div>
+        <div class="feature-grid">
+            <article class="feature-item">
+                <h3>Stempeluhr</h3>
+                <p>In der Werkstatt nur den Chip auflegen: morgens Kommen, abends Gehen. Pause, Termin und Konto per Taste.</p>
+            </article>
+            <article class="feature-item">
+                <h3>Chef-PC</h3>
+                <p>Alle Mitarbeiter auf einen Blick. Pro Person Monat, Jahr, Urlaub und Überstunden. Warnungen, wenn etwas nicht stimmt.</p>
+            </article>
+            <article class="feature-item">
+                <h3>Excel / TaxMetall</h3>
+                <p>Beim Anlegen die Excel der Person wählen. Danach schreibt jede Stempelung automatisch in genau diese Datei. Die Formeln bleiben erhalten.</p>
+            </article>
+            <article class="feature-item">
+                <h3>Lokal im Betrieb</h3>
+                <p>Eine Datenbank auf dem Chef-PC. Die Werkstatt findet ihn selbst im Netzwerk. Keine Cloud, keine monatlichen Lizenzen.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section container" id="videos">
+        <div class="section-heading">
+            <div class="eyebrow">Kurzfilme</div>
+            <h2>Jede Funktion im Video</h2>
+        </div>
+        <div class="video-grid">
+            <article class="video-card">
+                <video controls playsinline preload="metadata" poster="images/zeitstempel/stempeluhr.jpg">
+                    <source src="videos/zeitstempel-stempeluhr.mp4?v=1" type="video/mp4">
+                </video>
+                <p>Stempeluhr: Chip auflegen, Mein Konto, Pause.</p>
+            </article>
+            <article class="video-card">
+                <video controls playsinline preload="metadata" poster="images/zeitstempel/chef-heute.jpg">
+                    <source src="videos/zeitstempel-chef.mp4?v=1" type="video/mp4">
+                </video>
+                <p>Chef-PC: Mitarbeiter heute und Übersicht aller Personen.</p>
+            </article>
+            <article class="video-card">
+                <video controls playsinline preload="metadata" poster="images/zeitstempel/chef-monat.jpg">
+                    <source src="videos/zeitstempel-monat.mp4?v=1" type="video/mp4">
+                </video>
+                <p>Monatsplan und Jahr / Überstunden einer Person.</p>
+            </article>
+            <article class="video-card">
+                <video controls playsinline preload="metadata" poster="images/zeitstempel/chef-excel.jpg">
+                    <source src="videos/zeitstempel-excel.mp4?v=1" type="video/mp4">
+                </video>
+                <p>Mitarbeiter anlegen, Excel / TaxMetall, Einstellungen.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section container" id="funktionen">
+        <div class="section-heading">
+            <div class="eyebrow">Alle Funktionen</div>
+            <h2>Bilder aus der laufenden App</h2>
+        </div>
+        <div class="gallery">
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/stempeluhr.jpg" data-caption="Stempeluhr in der Werkstatt: Chip auflegen = Kommen oder Gehen.">
+                <img src="images/zeitstempel/stempeluhr.jpg" alt="Stempeluhr mit der Aufforderung Chip auflegen">
+                <span class="shot-caption">Stempeluhr – Chip auflegen</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/stempeluhr-konto.jpg" data-caption="Mein Konto: Überstunden, Urlaub und heutige Zeiten, ohne zu stempeln.">
+                <img src="images/zeitstempel/stempeluhr-konto.jpg" alt="Kontoansicht an der Stempeluhr mit Überstunden und Urlaub">
+                <span class="shot-caption">Stempeluhr – Mein Konto</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/stempeluhr-pause.jpg" data-caption="Pause: Taste drücken, dann Chip auflegen.">
+                <img src="images/zeitstempel/stempeluhr-pause.jpg" alt="Stempeluhr wartet auf den Chip für Pause">
+                <span class="shot-caption">Stempeluhr – Pause</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/stempeluhr-termin.jpg" data-caption="Termin: Taste drücken, dann Chip auflegen.">
+                <img src="images/zeitstempel/stempeluhr-termin.jpg" alt="Stempeluhr wartet auf den Chip für Termin">
+                <span class="shot-caption">Stempeluhr – Termin</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/chef-heute.jpg" data-caption="Chef-PC: Jede Person hat ein eigenes Fenster für den heutigen Tag.">
+                <img src="images/zeitstempel/chef-heute.jpg" alt="Chef-PC mit Mitarbeiterfenstern für den heutigen Tag">
+                <span class="shot-caption">Chef-PC – Heute alle</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/chef-uebersicht.jpg" data-caption="Übersicht aller Mitarbeiter: IST, Überstunden und Urlaub in einer Tabelle.">
+                <img src="images/zeitstempel/chef-uebersicht.jpg" alt="Tabelle mit allen Mitarbeitern, IST und Urlaub">
+                <span class="shot-caption">Chef-PC – Übersicht alle</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/chef-monat.jpg" data-caption="Monatsplan mit Kommen, Gehen, Pause, IST, SOLL und Bemerkung.">
+                <img src="images/zeitstempel/chef-monat.jpg" alt="Monatstabelle einer Person mit Kommen, Gehen und IST">
+                <span class="shot-caption">Chef-PC – Monatsplan</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/chef-jahr.jpg" data-caption="Jahr und Überstunden: Übertrag, IST, SOLL und Konto je Monat.">
+                <img src="images/zeitstempel/chef-jahr.jpg" alt="Jahresübersicht mit Überstundenkonto">
+                <span class="shot-caption">Chef-PC – Jahr / Überstunden</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/chef-mitarbeiter.jpg" data-caption="Neue Person anlegen und die Excel dieser Person zuordnen.">
+                <img src="images/zeitstempel/chef-mitarbeiter.jpg" alt="Formular zum Anlegen von Mitarbeitern mit Excel-Zuordnung">
+                <span class="shot-caption">Chef-PC – Mitarbeiter anlegen</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/chef-excel.jpg" data-caption="Excel und TaxMetall: Stempelungen automatisch in die Originaldatei schreiben.">
+                <img src="images/zeitstempel/chef-excel.jpg" alt="Excel- und TaxMetall-Bereich auf dem Chef-PC">
+                <span class="shot-caption">Chef-PC – Excel / TaxMetall</span>
+            </button>
+            <button class="gallery-item" type="button" data-lightbox data-full="images/zeitstempel/chef-einstellungen.jpg" data-caption="Einstellungen: Entprellung, Codes und Sicherungen.">
+                <img src="images/zeitstempel/chef-einstellungen.jpg" alt="Einstellungen mit Codes und Backup-Liste">
+                <span class="shot-caption">Chef-PC – Einstellungen</span>
+            </button>
+        </div>
     </section>
 
     <section class="section container" id="kontakt">
         <div class="contact-box">
             <div class="eyebrow">Nächster Schritt</div>
-            <h2>Zeitstempel im Betrieb einrichten?</h2>
-            <p>Wenn der gezeigte Ablauf zu Ihrer Arbeit passt, richten wir das Programm am Arbeitsplatz ein.</p>
-            <a href="mailto:hoelzer_alex@yahoo.de?subject=Zeitstempel" class="button">Kontakt aufnehmen</a>
+            <h2>Zeiterfassung im Betrieb einrichten?</h2>
+            <p>Wenn der gezeigte Ablauf zu Ihrer Arbeit passt, richten wir Stempeluhr und Chef-PC am Arbeitsplatz ein.</p>
+            <a href="mailto:hoelzer_alex@yahoo.de?subject=Zeiterfassung%20Zeitstempel" class="button">Kontakt aufnehmen</a>
         </div>
     </section>
 </main>
@@ -83,7 +199,7 @@
             <h3>Schnellzugriff</h3>
             <a href="index.html#start">Startseite</a>
             <a href="index.html#programme">Meine Lösungen</a>
-            <a href="zeitstempel.html">Zeitstempel</a>
+            <a href="zeitstempel.html">Zeiterfassung</a>
             <a href="kunde-x-01.html">Kunde X-01</a>
             <a href="kunde-x-02.html">Kunde X-02</a>
             <a href="dok-v01.html">DOK-V01</a>
@@ -99,6 +215,14 @@
         © 2026 – IT Design. Alle Rechte vorbehalten.
     </div>
 </footer>
+
+<div class="lightbox" data-lightbox-overlay hidden>
+    <button class="lightbox-close" type="button" data-lightbox-close aria-label="Schließen">×</button>
+    <div>
+        <img alt="">
+        <p data-lightbox-caption></p>
+    </div>
+</div>
 
 <script src="js/main.js"></script>
 </body>

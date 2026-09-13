@@ -869,6 +869,36 @@ nav a[aria-current="page"] {
     gap: 22px;
 }
 
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 8px;
+}
+
+.video-card {
+    background: #040a11;
+    border: 1px solid #24415c;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.video-card video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: cover;
+    background: #000;
+}
+
+.video-card p {
+    padding: 14px 16px 16px;
+    color: #c3d0de;
+    font-size: 13px;
+    margin: 0;
+}
+
 .gallery-item {
     display: block;
     width: 100%;
@@ -1045,6 +1075,7 @@ footer {
 
     .product-hero,
     .gallery,
+    .video-grid,
     .feature-grid {
         grid-template-columns: 1fr;
     }
