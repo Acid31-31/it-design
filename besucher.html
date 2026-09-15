@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Besucher – IT Designs</title>
+    <meta name="description" content="Aufrufe und Besucher der Website von IT Designs.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#030913">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+<header>
+    <div class="container nav">
+        <a href="index.html#start" class="logo">
+            <div class="logo-symbol" aria-hidden="true">AH</div>
+            <div>
+                <div class="logo-text">IT Designs</div>
+                <span class="logo-sub">INDIVIDUELLE IT-LÖSUNGEN</span>
+            </div>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="site-nav">
+            <a href="index.html#start">Startseite</a>
+            <a href="index.html#programme">Meine Lösungen</a>
+            <a href="index.html#ueber-mich">Über mich</a>
+            <a href="index.html#vorteile">Vorteile</a>
+            <a href="index.html#kontakt">Kontakt</a>
+        </nav>
+
+        <a href="index.html#kontakt" class="button nav-cta">Kontakt aufnehmen</a>
+    </div>
+</header>
+
+<main id="inhalt" class="section container">
+    <article class="legal">
+        <div class="eyebrow">Statistik</div>
+        <h1>Besucher</h1>
+        <p>So oft wurde die Website aufgerufen. Die Zählung startet, sobald die kostenlose Zählung eingerichtet ist.</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="stat-total">…</div>
+                <p class="stat-label">Aufrufe insgesamt</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat-unique">…</div>
+                <p class="stat-label">Besucher insgesamt</p>
+            </div>
+        </div>
+
+        <p id="stats-ok" hidden>
+            Die Zahlen werden automatisch aktualisiert. Mehr Details gibt es im
+            <a href="https://itdesigns-kruft.goatcounter.com" rel="noreferrer">kostenlosen Zähl-Konto</a>.
+        </p>
+        <p class="note" id="stats-setup">
+            Einmalig einrichten (kostenlos, etwa 2 Minuten):
+            <a href="https://www.goatcounter.com/signup" rel="noreferrer">goatcounter.com/signup</a>
+            öffnen, Konto anlegen und als Site-Code genau
+            <strong>itdesigns-kruft</strong> eintragen.
+            Website: <strong>https://www.it-designs.de</strong>.
+            Danach diese Seite neu laden.
+        </p>
+    </article>
+</main>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-column">
+            <h3>IT Design</h3>
+            <p>Individuelle IT-Lösungen für die Praxis.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Kontakt</h3>
+            <p>Alexander Hölzer</p>
+            <p>Pfarrer-Rosenkranz-Str. 9<br>56642 Kruft</p>
+            <p><a href="tel:+491708339993">+49 170 833 9993</a></p>
+            <p><a href="mailto:hoelzer_alex@yahoo.de">hoelzer_alex@yahoo.de</a></p>
+        </div>
+        <div class="footer-column">
+            <h3>Schnellzugriff</h3>
+            <a href="index.html#start">Startseite</a>
+            <a href="index.html#kontakt">Kontakt</a>
+        </div>
+        <div class="footer-column">
+            <h3>Rechtliches</h3>
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <a href="besucher.html" aria-current="page">Besucher</a>
+        </div>
+    </div>
+    <div class="container copyright">
+        © 2026 – IT Design. Alle Rechte vorbehalten.
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function () {
+    fetch("https://itdesigns-kruft.goatcounter.com/counter/TOTAL.json")
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("not ready");
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            var total = document.getElementById("stat-total");
+            var unique = document.getElementById("stat-unique");
+            var setup = document.getElementById("stats-setup");
+            var ok = document.getElementById("stats-ok");
+            if (total) {
+                total.textContent = data.count || "0";
+            }
+            if (unique) {
+                unique.textContent = data.count_unique || "0";
+            }
+            if (setup) {
+                setup.hidden = true;
+            }
+            if (ok) {
+                ok.hidden = false;
+            }
+        })
+        .catch(function () {
+            var total = document.getElementById("stat-total");
+            var unique = document.getElementById("stat-unique");
+            if (total) {
+                total.textContent = "–";
+            }
+            if (unique) {
+                unique.textContent = "–";
+            }
+        });
+})();
+</script>
+</body>
+</html>

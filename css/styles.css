@@ -792,6 +792,40 @@ nav a[aria-current="page"] {
     font-size: 14px;
 }
 
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 28px 0 24px;
+}
+
+.stat-card {
+    background: #06101b;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 16px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--blue-light);
+    line-height: 1.1;
+}
+
+.stat-label {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+@media (max-width: 640px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* =========================
    PRODUCT PAGE
 ========================= */

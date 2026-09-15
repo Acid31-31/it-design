@@ -1,4 +1,12 @@
 (function () {
+    if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+        var count = document.createElement("script");
+        count.async = true;
+        count.src = "https://gc.zgo.at/count.js";
+        count.setAttribute("data-goatcounter", "https://itdesigns-kruft.goatcounter.com/count");
+        document.head.appendChild(count);
+    }
+
     var toggle = document.querySelector(".nav-toggle");
     var nav = document.querySelector("header nav");
 
