@@ -740,6 +740,106 @@ nav a[aria-current="page"] {
     color: white;
 }
 
+.contact-form {
+    display: grid;
+    gap: 16px;
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-form .form-row {
+    display: grid;
+    gap: 16px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #d5e4f2;
+    font-size: 14px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #06101b;
+    color: var(--text);
+    font: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid rgba(22, 140, 255, 0.45);
+    border-color: var(--blue);
+}
+
+.contact-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.contact-form .form-hint {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+}
+
+.contact-form .form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.contact-form .form-check input {
+    width: auto;
+    margin-top: 3px;
+    accent-color: var(--blue);
+}
+
+.contact-form .form-check a {
+    color: var(--blue-light);
+    text-decoration: underline;
+}
+
+.contact-form .button {
+    justify-self: start;
+    border: 0;
+    cursor: pointer;
+}
+
+.contact-form .form-status {
+    min-height: 1.4em;
+    margin: 0;
+    font-size: 15px;
+}
+
+.contact-form .form-status.is-success {
+    color: var(--green);
+}
+
+.contact-form .form-status.is-error {
+    color: #ff8b8b;
+}
+
+.form-hp {
+    position: absolute;
+    left: -9999px;
+    height: 0;
+    overflow: hidden;
+}
+
+@media (min-width: 700px) {
+    .contact-form .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 /* =========================
    LEGAL PAGES
 ========================= */

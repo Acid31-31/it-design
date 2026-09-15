@@ -335,14 +335,44 @@
             <p>
                 Sie suchen eine individuelle Lösung oder möchten
                 einen bestehenden Arbeitsablauf vereinfachen?
+                Schreiben Sie mir über das Formular. Ihre Nachricht kommt direkt bei mir an –
+                ohne dass E-Mail oder Telefon öffentlich sichtbar sind.
             </p>
-            <div class="contact-name">Alexander Hölzer</div>
-            <div class="contact-info">
-                Pfarrer-Rosenkranz-Str. 9, 56642 Kruft<br>
-                Telefon: <a href="tel:+491708339993">+49 170 833 9993</a><br>
-                E-Mail: <a href="mailto:hoelzer_alex@yahoo.de">hoelzer_alex@yahoo.de</a>
-            </div>
-            <a href="mailto:hoelzer_alex@yahoo.de" class="button">Kontakt aufnehmen</a>
+            <form class="contact-form" id="kontaktformular" action="https://form.taxi/s/nf5a26ed" method="POST">
+                <input class="form-hp" type="text" name="_honeypot" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="_redirect" value="https://www.it-designs.de/index.html?gesendet=1#kontakt">
+                <input type="hidden" name="_subject" id="kontakt-betreff" value="Kontaktanfrage von it-designs.de">
+
+                <div>
+                    <label for="kontakt-name">Name</label>
+                    <input id="kontakt-name" name="Name" type="text" autocomplete="name" required>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="kontakt-email">E-Mail</label>
+                        <input id="kontakt-email" name="E-Mail" type="email" autocomplete="email">
+                    </div>
+                    <div>
+                        <label for="kontakt-telefon">Telefon</label>
+                        <input id="kontakt-telefon" name="Telefon" type="tel" autocomplete="tel">
+                    </div>
+                </div>
+                <p class="form-hint">Bitte E-Mail oder Telefon angeben, damit ich antworten kann.</p>
+
+                <div>
+                    <label for="kontakt-nachricht">Nachricht</label>
+                    <textarea id="kontakt-nachricht" name="Nachricht" required></textarea>
+                </div>
+
+                <label class="form-check">
+                    <input type="checkbox" name="Datenschutz" value="gelesen" required>
+                    <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen.</span>
+                </label>
+
+                <button class="button" type="submit">Nachricht senden</button>
+                <p class="form-status" id="kontakt-status" role="status"></p>
+            </form>
         </div>
     </section>
 </main>
@@ -357,9 +387,7 @@
         <div class="footer-column">
             <h3>Kontakt</h3>
             <p>Alexander Hölzer</p>
-            <p>Pfarrer-Rosenkranz-Str. 9<br>56642 Kruft</p>
-            <p><a href="tel:+491708339993">+49 170 833 9993</a></p>
-            <p><a href="mailto:hoelzer_alex@yahoo.de">hoelzer_alex@yahoo.de</a></p>
+            <p><a href="index.html#kontakt">Nachricht schreiben</a></p>
         </div>
         <div class="footer-column">
             <h3>Schnellzugriff</h3>

@@ -71,4 +71,39 @@
             closeLightbox();
         }
     });
+
+    var form = document.getElementById("kontaktformular");
+    if (form) {
+        var params = new URLSearchParams(window.location.search);
+        var thema = params.get("thema");
+        var subject = document.getElementById("kontakt-betreff");
+        var status = document.getElementById("kontakt-status");
+
+        if (thema && subject) {
+            subject.value = "Kontaktanfrage: " + thema + " – it-designs.de";
+        }
+
+        if (params.get("gesendet") === "1" && status) {
+            status.textContent = "Danke, Ihre Nachricht ist angekommen. Ich melde mich.";
+            status.classList.add("is-success");
+            form.querySelectorAll("input, textarea, button").forEach(function (field) {
+                if (field.type !== "hidden") {
+                    field.disabled = true;
+                }
+            });
+        }
+
+        form.addEventListener("submit", function (event) {
+            var email = (document.getElementById("kontakt-email") || {}).value || "";
+            var phone = (document.getElementById("kontakt-telefon") || {}).value || "";
+            if (!email.trim() && !phone.trim()) {
+                event.preventDefault();
+                if (status) {
+                    status.textContent = "Bitte E-Mail oder Telefon angeben, damit ich antworten kann.";
+                    status.classList.remove("is-success");
+                    status.classList.add("is-error");
+                }
+            }
+        });
+    }
 })();
