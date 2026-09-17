@@ -1,5 +1,15 @@
 (function () {
-    if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+    var intern = false;
+    try {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get("intern") === "1") {
+            localStorage.setItem("itdesigns-intern", "1");
+            document.cookie = "itdesigns-intern=1;path=/;max-age=31536000;SameSite=Lax";
+        }
+        intern = localStorage.getItem("itdesigns-intern") === "1";
+    } catch (e) {}
+
+    if (!intern && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
         var count = document.createElement("script");
         count.async = true;
         count.src = "https://gc.zgo.at/count.js";
