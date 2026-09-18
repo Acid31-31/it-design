@@ -422,8 +422,8 @@ nav a[aria-current="page"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-areas:
         "rohr dok material"
-        "zeitstempel kunde1 kunde2"
-        "individuell . .";
+        "zeitstempel holiday kunde1"
+        "kunde2 individuell .";
     gap: 16px;
     align-items: stretch;
 }
@@ -442,6 +442,10 @@ nav a[aria-current="page"] {
 
 #programm-zeitstempel {
     grid-area: zeitstempel;
+}
+
+#programm-holiday {
+    grid-area: holiday;
 }
 
 #programm-individuell {
@@ -1265,6 +1269,7 @@ footer {
             "dok"
             "material"
             "zeitstempel"
+            "holiday"
             "kunde1"
             "kunde2"
             "individuell";
