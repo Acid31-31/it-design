@@ -109,12 +109,10 @@ header {
     font-weight: bold;
 }
 
-.logo-sub {
+.logo img {
     display: block;
-    color: var(--blue-light);
-    font-size: 11px;
-    margin-top: 1px;
-    letter-spacing: 1px;
+    height: 54px;
+    width: auto;
 }
 
 nav {
@@ -1244,6 +1242,10 @@ footer {
 }
 
 @media (max-width: 550px) {
+    .logo img {
+        height: 40px;
+    }
+
     .hero h1 {
         font-size: 42px;
     }
