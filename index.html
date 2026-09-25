@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; connect-src 'self' https://itdesigns-kruft.goatcounter.com https://gc.zgo.at; img-src 'self' https://itdesigns-kruft.goatcounter.com https://gc.zgo.at; media-src 'self'; style-src 'self'; font-src 'self'; form-action https://form.taxi; base-uri 'self'; object-src 'none'; frame-src 'none'; worker-src 'none'">
     <link rel="canonical" href="https://www.it-designs.de/">
     <meta property="og:url" content="https://www.it-designs.de/">
     <title>IT Designs Kruft – Individuelle IT-Lösungen</title>
@@ -13,7 +15,7 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="de_DE">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="css/styles.css?v=5">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -395,30 +397,30 @@
                 ohne dass E-Mail oder Telefon öffentlich sichtbar sind.
             </p>
             <form class="contact-form" id="kontaktformular" action="https://form.taxi/s/nf5a26ed" method="POST">
-                <input class="form-hp" type="text" name="_honeypot" tabindex="-1" autocomplete="off">
+                <input class="form-hp" type="text" name="_honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <input type="hidden" name="_redirect" value="https://www.it-designs.de/?gesendet=1#kontakt">
                 <input type="hidden" name="_subject" id="kontakt-betreff" value="Kontaktanfrage von it-designs.de">
 
                 <div>
                     <label for="kontakt-name">Name</label>
-                    <input id="kontakt-name" name="Name" type="text" autocomplete="name" required>
+                    <input id="kontakt-name" name="Name" type="text" autocomplete="name" maxlength="80" required>
                 </div>
 
                 <div class="form-row">
                     <div>
                         <label for="kontakt-email">E-Mail</label>
-                        <input id="kontakt-email" name="E-Mail" type="email" autocomplete="email">
+                        <input id="kontakt-email" name="E-Mail" type="email" autocomplete="email" maxlength="120">
                     </div>
                     <div>
                         <label for="kontakt-telefon">Telefon</label>
-                        <input id="kontakt-telefon" name="Telefon" type="tel" autocomplete="tel">
+                        <input id="kontakt-telefon" name="Telefon" type="tel" autocomplete="tel" maxlength="40">
                     </div>
                 </div>
                 <p class="form-hint">Bitte E-Mail oder Telefon angeben, damit ich antworten kann.</p>
 
                 <div>
                     <label for="kontakt-nachricht">Nachricht</label>
-                    <textarea id="kontakt-nachricht" name="Nachricht" required></textarea>
+                    <textarea id="kontakt-nachricht" name="Nachricht" maxlength="4000" required></textarea>
                 </div>
 
                 <label class="form-check">
@@ -470,6 +472,6 @@
     </div>
 </footer>
 
-<script src="js/main.js?v=2"></script>
+<script src="js/main.js?v=30"></script>
 </body>
 </html>
