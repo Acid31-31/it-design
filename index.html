@@ -8,14 +8,14 @@
     <link rel="canonical" href="https://www.it-designs.de/">
     <meta property="og:url" content="https://www.it-designs.de/">
     <title>IT Designs Kruft – Individuelle IT-Lösungen</title>
-    <meta name="description" content="IT Designs aus Kruft: individuelle IT-Lösungen für die Praxis. Programme und digitale Lösungen zur Vereinfachung von Arbeitsabläufen.">
+    <meta name="description" content="IT Designs aus Kruft: Wählen Sie Ihr Problem und sehen Sie die passende Lösung. Rohrzuschnitt, Aufträge, Blechlager, Zeiterfassung oder Urlaubskosten.">
     <meta name="theme-color" content="#030913">
     <meta property="og:title" content="IT Designs Kruft – Individuelle IT-Lösungen">
     <meta property="og:description" content="IT Designs aus Kruft. Praxisnahe IT-Lösungen, die Arbeitsabläufe vereinfachen und die tägliche Arbeit effizienter machen.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="de_DE">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/styles.css?v=5">
+    <link rel="stylesheet" href="css/styles.css?v=7">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -51,7 +51,7 @@
 
         <nav id="site-nav">
             <a href="#start">Startseite</a>
-            <a href="#programme">Meine Lösungen</a>
+            <a href="#problem">Lösung finden</a>
             <a href="#ueber-mich">Über mich</a>
             <a href="#vorteile">Vorteile</a>
             <a href="#kontakt">Kontakt</a>
@@ -64,30 +64,16 @@
 <main id="start">
     <section class="hero container">
         <div class="hero-content">
-            <div class="eyebrow">IT Designs &amp; individuelle Lösungen</div>
-            <h1>Intelligente Lösungen für<br><span>mehr Effizienz.</span></h1>
+            <div class="eyebrow">Für Ihren Ablauf</div>
+            <h1>Welches Problem<br><span>soll weg?</span></h1>
+            <p class="hero-slogan">Intelligente Lösungen für mehr Effizienz.</p>
             <p class="hero-description">
-                Praxisnahe IT-Lösungen, die Arbeitsabläufe vereinfachen,
-                wiederkehrende Aufgaben reduzieren und die tägliche Arbeit
-                effizienter machen.
+                Wählen Sie, was Sie heute aufhält.
+                Sie sehen die passende Lösung, nicht alle Programme auf einmal.
             </p>
             <div class="hero-buttons">
-                <a href="#programme" class="button">Meine Lösungen ansehen</a>
-                <a href="#ueber-mich" class="button button-outline">Mehr erfahren</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-title">Zeit sparen</span>
-                    <span class="stat-text">Weniger manueller Aufwand</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-title">Übersichtlich</span>
-                    <span class="stat-text">Klare und einfache Abläufe</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-title">Individuell</span>
-                    <span class="stat-text">Auf den jeweiligen Bedarf abgestimmt</span>
-                </div>
+                <a href="#problem" class="button">Mein Problem wählen</a>
+                <a href="#kontakt" class="button button-outline">Ablauf schildern</a>
             </div>
         </div>
 
@@ -111,21 +97,44 @@
         </div>
     </section>
 
-    <section class="section container" id="idee">
-        <div class="pitch">
-            <p class="pitch-text">
-                Du brauchst eine App, die den Überblick behält – Kosten, Zeiten, Abläufe.
-                Für die Firma oder für dich privat?
-            </p>
-            <p class="pitch-cta">Sag Bescheid, ich bau sie.</p>
-            <a href="#kontakt" class="button">Nachricht schreiben</a>
+    <section class="section container" id="problem">
+        <div class="section-heading">
+            <div class="eyebrow">Ihr Problem</div>
+            <h2>Was wollen Sie loswerden?</h2>
+        </div>
+        <div class="problems">
+            <button class="problem" type="button" data-show="programm-rohr">
+                <strong>Ich sehe nicht, was im Rohrlager noch da ist</strong>
+                <span>Zuerst die Reste einplanen, dann volle Stangen. Ist nichts da, muss neu bestellt werden.</span>
+            </button>
+            <button class="problem" type="button" data-show="programm-auftrag">
+                <strong>Zeichnungen und Excel sortiere ich von Hand</strong>
+                <span>PDF und Bestellliste kommen rein. Umsortieren, umbenennen, heften.</span>
+            </button>
+            <button class="problem" type="button" data-show="programm-material">
+                <strong>Im Blechlager stimmt nicht, was noch frei ist</strong>
+                <span>Tafel verbraucht oder für einen Auftrag reserviert. Bestand und Reste sollen von selbst stimmen.</span>
+            </button>
+            <button class="problem" type="button" data-show="programm-zeitstempel">
+                <strong>Arbeitszeiten landen zu spät in der Excel</strong>
+                <span>Zettel in der Werkstatt, am Ende soll es in TaxMetall stehen.</span>
+            </button>
+            <button class="problem" type="button" data-show="programm-holiday">
+                <strong>Der Urlaub war teurer als die Miete</strong>
+                <span>Sprit, Strom, Einkauf und Maut fehlen in der Rechnung.</span>
+            </button>
+            <button class="problem" type="button" data-show="programm-individuell">
+                <strong>Mein Ablauf passt in keins davon</strong>
+                <span>Dann baue ich das Programm für genau diese Arbeit.</span>
+            </button>
         </div>
     </section>
 
     <section class="section container" id="programme">
         <div class="section-heading">
-            <div class="eyebrow">Meine Lösungen</div>
-            <h2>Digitale Lösungen für die Praxis</h2>
+            <div class="eyebrow">Die Lösung</div>
+            <h2 id="loesung-titel">Wählen Sie oben Ihr Problem</h2>
+            <p class="solution-hint" id="loesung-hinweis">Danach sehen Sie nur das Programm, das dazu passt.</p>
         </div>
 
         <div class="programs">
@@ -136,20 +145,25 @@
                     </div>
                     <div>
                         <h3>Rohre Zuschnitt</h3>
-                        <div class="card-subtitle">Schnittplanung &amp; Lager</div>
+                        <div class="card-subtitle">Komplettes Rohrlager</div>
                     </div>
                 </div>
                 <p class="card-description">
-                    Rohrzuschnitte mit Gehrungen planen: Teile auf Stangen und Rohreste verteilen,
-                    weniger Sägeverstellung, Zuschnitt-PDF direkt an die Säge.
+                    Das ganze Rohrlager im Blick. Zuerst werden Reste eingeplant,
+                    danach volle Stangen. Ist nichts mehr da, wird neues Material automatisch bestellt.
+                    Komplette Kundenzeichnungen zieht man per Drag-and-drop hinein.
+                    Alle Gehrungen und die Stückzahl werden automatisch berechnet und eingeplant.
                 </p>
                 <div class="program-preview">
                     <img src="images/rohre-zuschnitt/hauptfenster.jpg" alt="Hauptfenster der App Rohre Zuschnitt Optimierung">
                 </div>
                 <div class="check-list">
-                    <span>Gehrungen intelligent gruppieren</span>
-                    <span>Rohreste vor Neuware verbrauchen</span>
-                    <span>Lager nach Materialart getrennt</span>
+                    <span>Lager: Neumaterial und Rohreste</span>
+                    <span>Zuerst Rohreste, dann Originalstangen</span>
+                    <span>PDF oder ZIP hineinziehen, Gehrung und Länge werden übernommen</span>
+                    <span>Stückzahl aus der Bestell-Excel</span>
+                    <span>Optimieren und Zuschnitt-PDF</span>
+                    <span>Fehlen Stangen, entsteht eine Bestellliste</span>
                 </div>
                 <div class="card-buttons">
                     <a href="rohre-zuschnitt.html" class="button" target="_blank" rel="noopener noreferrer">Mehr erfahren</a>
@@ -173,9 +187,12 @@
                     <img src="images/dok-v01/hauptfenster.jpg" alt="Hauptfenster der App DOK-V01">
                 </div>
                 <div class="check-list">
-                    <span>PDF + Excel per Drag &amp; Drop laden</span>
-                    <span>Sortieren nach Excel-Reihenfolge</span>
-                    <span>Wasserzeichen und Prüf-PDF</span>
+                    <span>PDF, Excel und Outlook-Mail hineinziehen</span>
+                    <span>Prüf- und Bestell-PDF wird erkannt</span>
+                    <span>Sortieren und umbenennen</span>
+                    <span>Zusammenfügen und Vorschau</span>
+                    <span>Wasserzeichen mit Auftragsnummer</span>
+                    <span>Liefertermin ändern, Prüfung gegen Excel</span>
                 </div>
                 <div class="card-buttons">
                     <a href="dok-v01.html" class="button" target="_blank" rel="noopener noreferrer">Mehr erfahren</a>
@@ -192,16 +209,23 @@
                     </div>
                 </div>
                 <p class="card-description">
-                    Blechlager im Blick: Material suchen, Regale automatisch zuordnen,
-                    Reste verwalten und Bestände mit Gewicht und Auslastung führen.
+                    Reste werden eigene Positionen: eigene Nummer, Suche, Reservierung für Auftrag oder Nachproduktion. Der ganze Bestand steht in der Liste.
+                    Sind 10 Tafeln da und 8 für einen Auftrag reserviert, bleiben 2 frei.
+                    Ist eine GF-Tafel aufgebraucht, erscheint sie zur Nachbestellung.
+                    Gesamtbestand, Gewicht und Kosten des Lagers werden berechnet.
                 </p>
                 <div class="program-preview">
                     <img src="images/materialmanager/hauptfenster.jpg" alt="Hauptfenster der App MaterialManager">
                 </div>
                 <div class="check-list">
-                    <span>10 Regale plus EU-Palette</span>
-                    <span>Automatische Lagerzuordnung</span>
-                    <span>Suche, Filter, Excel-Import</span>
+                    <span>Resteverwaltung: Rest anlegen, Restnummer nach Kalenderwoche</span>
+                    <span>Rest suchen, für Auftrag oder Nachproduktion reservieren</span>
+                    <span>Reservieren: 10 Tafeln, 8 reserviert, 2 frei</span>
+                    <span>GF-, MF- und KF-Tafel aufgebraucht: Nachbestell-Liste</span>
+                    <span>Regal wird automatisch gewählt</span>
+                    <span>Gesamtbestand, Gewicht und Kosten werden berechnet</span>
+                    <span>Regalauslastung und Inventur</span>
+                    <span>Etikett zum Material</span>
                 </div>
                 <div class="card-buttons">
                     <a href="materialmanager.html" class="button" target="_blank" rel="noopener noreferrer">Mehr erfahren</a>
@@ -223,6 +247,13 @@
                     Digitale Zeiterfassung: Chip in der Werkstatt, alle Personen auf dem Chef-PC.
                     Jede Stempelung landet automatisch in der Excel – bereit für TaxMetall.
                 </p>
+                <div class="check-list">
+                    <span>Chip auflegen: Kommen oder Gehen</span>
+                    <span>Pause, Pause Ende, Termin</span>
+                    <span>Mein Konto: Urlaub und Überstunden</span>
+                    <span>Chef-PC: Monat, Jahr, Korrektur</span>
+                    <span>Jede Stempelung schreibt in die Excel</span>
+                </div>
                 <div class="program-preview program-preview-video">
                     <video controls playsinline preload="metadata" poster="images/zeitstempel/stempeluhr.jpg">
                         <source src="videos/zeitstempel-praesentation.mp4?v=8" type="video/mp4">
@@ -253,57 +284,15 @@
                     <img src="images/holiday-energy/dashboard.jpg" alt="Dashboard der App Holiday Manager">
                 </div>
                 <div class="check-list">
+                    <span>Miete, Ortstaxe, Holz, Sauna, Endreinigung</span>
+                    <span>Stromzähler und Verbrauch</span>
                     <span>Benzin, Diesel oder E-Auto laden</span>
-                    <span>Einkauf, Maut und Nebenkosten</span>
-                    <span>Echte Summe statt nur Mietpreis</span>
+                    <span>Einkauf, Maut und weitere Ausgaben</span>
+                    <span>Echte Summe, dazu PDF und Excel</span>
                 </div>
                 <div class="card-buttons">
                     <a href="holiday-energy.html" class="button" target="_blank" rel="noopener noreferrer">Mehr erfahren</a>
                     <a href="holiday-energy.html#screenshots" class="button button-outline" target="_blank" rel="noopener noreferrer">Screenshots</a>
-                </div>
-            </article>
-
-            <article class="card" id="programm-kunde-x01">
-                <div class="card-header">
-                    <div class="card-icon">▶</div>
-                    <div>
-                        <h3>Kunde X-01</h3>
-                        <div class="card-subtitle">Programm im Video</div>
-                    </div>
-                </div>
-                <p class="card-description">
-                    Video zur individuellen Lösung für Kunde X-01: so sieht der Ablauf am Rechner aus.
-                </p>
-                <div class="program-preview program-preview-video">
-                    <video controls playsinline preload="metadata">
-                        <source src="videos/kunde-x-01.mp4?v=3" type="video/mp4">
-                    </video>
-                </div>
-                <div class="card-buttons">
-                    <a href="kunde-x-01.html" class="button">Video öffnen</a>
-                    <a href="kunde-x-01.html" class="button button-outline">Groß ansehen</a>
-                </div>
-            </article>
-
-            <article class="card green" id="programm-kunde-x02">
-                <div class="card-header">
-                    <div class="card-icon">▶</div>
-                    <div>
-                        <h3>Kunde X-02</h3>
-                        <div class="card-subtitle">Programm im Video</div>
-                    </div>
-                </div>
-                <p class="card-description">
-                    Video zur individuellen Lösung für Kunde X-02: so sieht der Ablauf am Rechner aus.
-                </p>
-                <div class="program-preview program-preview-video">
-                    <video controls playsinline preload="metadata">
-                        <source src="videos/kunde-x-02.mp4?v=3" type="video/mp4">
-                    </video>
-                </div>
-                <div class="card-buttons">
-                    <a href="kunde-x-02.html" class="button">Video öffnen</a>
-                    <a href="kunde-x-02.html" class="button button-outline">Groß ansehen</a>
                 </div>
             </article>
 
@@ -316,21 +305,65 @@
                     </div>
                 </div>
                 <p class="card-description">
-                    Es gibt keine Grenzen für weitere Lösungen.
-                    Weitere Programme können jederzeit nach Wunsch erstellt werden –
-                    passgenau für Ihren Arbeitsablauf.
+                    Wenn keiner der Abläufe oben Ihrer ist, baue ich das Programm dafür.
+                    Unten zwei Beispiele aus Betrieben.
                 </p>
                 <div class="program-preview">
                     <img src="images/individuell/hauptfenster.png" alt="Digitale Darstellung einer individuell entwickelten Software">
                 </div>
                 <div class="check-list">
-                    <span>Keine Grenzen für weitere Lösungen</span>
-                    <span>Programme nach Wunsch erstellen</span>
-                    <span>Passgenau statt Standardsoftware</span>
+                    <span>Ablauf beschreiben, Programm dafür bauen</span>
+                    <span>Weitere Programme jederzeit</span>
+                    <span>Ihre Listen, Ihre Begriffe, Ihre Ausgaben</span>
+                    <span>Weniger Handarbeit am Rechner</span>
                 </div>
                 <div class="card-buttons">
                     <a href="individuell.html" class="button" target="_blank" rel="noopener noreferrer">Mehr erfahren</a>
                     <a href="individuell.html#screenshots" class="button button-outline" target="_blank" rel="noopener noreferrer">Bilder</a>
+                </div>
+            </article>
+
+            <article class="card example" id="programm-kunde-x01">
+                <div class="card-header">
+                    <div class="card-icon">▶</div>
+                    <div>
+                        <h3>Beispiel aus einem Betrieb</h3>
+                        <div class="card-subtitle">Eigenes Programm, nur für diesen Ablauf</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    So sieht ein Programm aus, das nur für einen Betrieb gebaut wurde.
+                </p>
+                <div class="program-preview program-preview-video">
+                    <video controls playsinline preload="metadata">
+                        <source src="videos/kunde-x-01.mp4?v=3" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-buttons">
+                    <a href="kunde-x-01.html" class="button">Video öffnen</a>
+                    <a href="kunde-x-01.html" class="button button-outline">Groß ansehen</a>
+                </div>
+            </article>
+
+            <article class="card green example" id="programm-kunde-x02">
+                <div class="card-header">
+                    <div class="card-icon">▶</div>
+                    <div>
+                        <h3>Zweites Beispiel aus einem Betrieb</h3>
+                        <div class="card-subtitle">Ebenfalls nur für diesen Ablauf</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Ein weiterer Ablauf, für den es kein fertiges Programm gab.
+                </p>
+                <div class="program-preview program-preview-video">
+                    <video controls playsinline preload="metadata">
+                        <source src="videos/kunde-x-02.mp4?v=3" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-buttons">
+                    <a href="kunde-x-02.html" class="button">Video öffnen</a>
+                    <a href="kunde-x-02.html" class="button button-outline">Groß ansehen</a>
                 </div>
             </article>
         </div>
@@ -449,7 +482,7 @@
         <div class="footer-column">
             <h3>Schnellzugriff</h3>
             <a href="#start">Startseite</a>
-            <a href="#programme">Meine Lösungen</a>
+            <a href="#problem">Lösung finden</a>
             <a href="zeitstempel.html">Zeiterfassung</a>
             <a href="holiday-energy.html">Holiday Manager</a>
             <a href="dok-v01.html">DOK-V01</a>
@@ -472,6 +505,6 @@
     </div>
 </footer>
 
-<script src="js/main.js?v=30"></script>
+<script src="js/main.js?v=33"></script>
 </body>
 </html>

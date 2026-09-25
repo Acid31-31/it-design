@@ -233,6 +233,14 @@ nav a[aria-current="page"] {
     color: var(--blue);
 }
 
+.hero-slogan {
+    color: var(--blue);
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    margin: -8px 0 18px;
+}
+
 .hero-description {
     color: #b5c3d2;
     font-size: 17px;
@@ -423,6 +431,67 @@ nav a[aria-current="page"] {
 /* =========================
    PROGRAMS
 ========================= */
+
+.problems {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.problem {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: var(--text);
+    background: #071321;
+    border: 1px solid #24415c;
+    border-radius: 10px;
+    padding: 16px 18px;
+    cursor: pointer;
+}
+
+.problem strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 6px;
+}
+
+.problem span {
+    display: block;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.problem:hover,
+.problem[aria-pressed="true"] {
+    border-color: var(--blue);
+    background: #0c2238;
+}
+
+.solution-hint {
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+body.has-chooser .programs .card {
+    display: none;
+}
+
+body.has-chooser .programs .card.is-shown {
+    display: flex;
+}
+
+body.has-chooser .programs {
+    grid-template-columns: minmax(0, 760px);
+    justify-content: center;
+    grid-template-areas: none;
+}
+
+body.has-chooser .programs .card.is-shown {
+    grid-area: auto;
+}
 
 .programs {
     display: grid;
@@ -1270,6 +1339,10 @@ footer {
     }
 
     .benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .problems {
         grid-template-columns: 1fr;
     }
 

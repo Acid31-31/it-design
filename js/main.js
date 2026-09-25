@@ -89,6 +89,47 @@
         }
     });
 
+    var chooser = document.getElementById("problem");
+    var programs = document.querySelector(".programs");
+    var solutionTitle = document.getElementById("loesung-titel");
+    var solutionHint = document.getElementById("loesung-hinweis");
+    if (chooser && programs) {
+        var titles = {
+            "programm-rohr": "Das Rohrlager im Blick",
+            "programm-auftrag": "Zeichnungen und Listen ohne Handarbeit",
+            "programm-material": "Blechlager: frei, reserviert, nachbestellen",
+            "programm-zeitstempel": "Zeiten direkt in die Excel",
+            "programm-holiday": "Was der Urlaub wirklich kostet",
+            "programm-individuell": "Ein Programm für genau Ihren Ablauf"
+        };
+        document.body.classList.add("has-chooser");
+        chooser.querySelectorAll("[data-show]").forEach(function (button) {
+            button.addEventListener("click", function () {
+                var id = button.getAttribute("data-show");
+                programs.querySelectorAll(".card").forEach(function (card) {
+                    var show = card.id === id;
+                    if (id === "programm-individuell" && card.classList.contains("example")) {
+                        show = true;
+                    }
+                    card.classList.toggle("is-shown", show);
+                });
+                chooser.querySelectorAll("[data-show]").forEach(function (item) {
+                    item.setAttribute("aria-pressed", item === button ? "true" : "false");
+                });
+                if (solutionTitle) {
+                    solutionTitle.textContent = titles[id] || "Die passende Lösung";
+                }
+                if (solutionHint) {
+                    solutionHint.textContent = "Das Programm dazu. Die anderen bleiben ausgeblendet.";
+                }
+                var block = document.getElementById("programme");
+                if (block) {
+                    block.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        });
+    }
+
     var form = document.getElementById("kontaktformular");
     if (form) {
         var params = new URLSearchParams(window.location.search);
