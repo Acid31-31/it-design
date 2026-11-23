@@ -95,8 +95,7 @@ body.demo-body {
   font-size: 20px;
 }
 .kiosk-account.private {
-  grid-template-columns: repeat(2, minmax(160px, 1fr));
-  width: min(520px, 92vw);
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
 }
 #btnFertig {
   min-width: 220px;

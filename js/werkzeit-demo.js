@@ -64,6 +64,7 @@
   var pendingAction = null;
   var viewingMenu = false;
   var flashChip = "";
+  var lastAccountEmp = null;
   var resetTimer = null;
   var busy = false;
   var lastActivity = Date.now();
@@ -993,18 +994,25 @@
     }
   }
 
+  function hidePrivateTimes() {
+    var box = document.getElementById("account");
+    var planBox = document.getElementById("plan");
+    if (box) { box.hidden = true; box.innerHTML = ""; }
+    if (planBox) { planBox.hidden = true; planBox.innerHTML = ""; }
+  }
+
   function idleScreen() {
     holdScreen = false;
     clearTimeout(resetTimer);
     pendingAction = null;
     viewingMenu = false;
     flashChip = "";
+    lastAccountEmp = null;
     busy = false;
     document.getElementById("headline").textContent = "Mitarbeitercode eingeben";
     document.getElementById("headline").className = "";
     setSubline("");
-    document.getElementById("account").hidden = true;
-    document.getElementById("account").innerHTML = "";
+    hidePrivateTimes();
     document.getElementById("who").hidden = true;
     document.getElementById("btnFertig").hidden = true;
     document.getElementById("btnTermin").textContent = "Termin";
@@ -1017,7 +1025,8 @@
     document.getElementById("headline").textContent = text;
     document.getElementById("headline").className = "err";
     setSubline("Code noch einmal eingeben");
-    document.getElementById("account").hidden = true;
+    hidePrivateTimes();
+    lastAccountEmp = null;
     document.getElementById("who").hidden = true;
     document.getElementById("btnFertig").hidden = true;
     viewingMenu = false;
@@ -1029,26 +1038,19 @@
     resetTimer = setTimeout(idleScreen, 4000);
   }
 
-  function privateNumbers(data) {
-    var box = document.getElementById("account");
-    box.hidden = false;
-    box.innerHTML =
-      "<article><div class='muted'>Überstunden</div><div class='kpi'>" + esc(data.balance) + "</div></article>" +
-      "<article><div class='muted'>Resturlaub</div><div class='kpi'>" + esc(String(data.vacation_remaining)) + "</div></article>";
-  }
-
   function showMenu(emp) {
     var data = accountData(emp);
     viewingMenu = true;
     pendingAction = null;
+    lastAccountEmp = emp;
     flashChip = emp.rfid_id || flashChip;
     document.getElementById("headline").className = "";
     document.getElementById("headline").textContent = emp.display_name;
     setSubline(statusLabel(data.status).toUpperCase());
     var who = document.getElementById("who");
     who.hidden = false;
-    who.textContent = "Kommen, Gehen oder Termin. Die Zahlen unten siehst nur du.";
-    privateNumbers(data);
+    who.textContent = "Kommen, Gehen oder Termin.";
+    hidePrivateTimes();
     hidePin();
     document.getElementById("actionMenu").hidden = false;
     document.getElementById("btnFertig").hidden = false;
@@ -1056,8 +1058,47 @@
     armIdleReturn();
   }
 
+  function showMyTimes() {
+    if (!lastAccountEmp) return;
+    var data = accountData(lastAccountEmp);
+    viewingMenu = true;
+    document.getElementById("headline").className = "";
+    document.getElementById("headline").textContent = lastAccountEmp.display_name;
+    setSubline(statusLabel(data.status).toUpperCase() + "  ·  nur für dich");
+    var who = document.getElementById("who");
+    who.hidden = false;
+    who.textContent = "Resturlaub, Überstunden und heute. Fertig oder einfach weggehen.";
+    var box = document.getElementById("account");
+    box.hidden = false;
+    box.innerHTML =
+      "<article><div class='muted'>Überstunden</div><div class='kpi'>" + esc(data.balance) + "</div></article>" +
+      "<article><div class='muted'>Heute</div><div class='kpi'>" + esc(data.today_ist) + "</div></article>" +
+      "<article><div class='muted'>Resturlaub</div><div class='kpi'>" + esc(String(data.vacation_remaining)) + "</div></article>";
+    var days = data.vacation_days.length
+      ? data.vacation_days.map(function (d) { return "<li><span>" + germanDate(d.date) + "</span><strong>" + d.label + "</strong></li>"; }).join("")
+      : "<li>Kein Urlaub eingetragen</li>";
+    var kommt = [data.today_kommt, data.today_kommt2].filter(Boolean).join(" / ") || "–";
+    var geht = [data.today_geht, data.today_geht2].filter(Boolean).join(" / ") || "–";
+    var planBox = document.getElementById("plan");
+    planBox.hidden = false;
+    planBox.innerHTML =
+      "<article><h3>Überstunden " + data.year + "</h3>" +
+      "<p>Übertrag <strong>" + data.opening + "</strong></p>" +
+      "<p>Aktuelles Konto <strong>" + data.closing + "</strong></p>" +
+      "<p>Heute +/- <strong>" + data.today_delta + "</strong></p>" +
+      "<p>Heute Kommt <strong>" + kommt + "</strong> · Geht <strong>" + geht + "</strong></p></article>" +
+      "<article><h3>Urlaub " + data.year + "</h3>" +
+      "<p>Anspruch " + data.vacation_total + " · genommen " + data.vacation_taken + " · Rest <strong>" + data.vacation_remaining + "</strong></p>" +
+      "<ul>" + days + "</ul></article>";
+    hidePin();
+    document.getElementById("actionMenu").hidden = false;
+    document.getElementById("btnFertig").hidden = false;
+    armIdleReturn();
+  }
+
   function showPunchFlash(data) {
     viewingMenu = false;
+    lastAccountEmp = null;
     flashChip = data.rfid_id || "";
     document.getElementById("headline").className = data.event_type === "CLOCK_OUT" ? "out" : "ok";
     document.getElementById("headline").textContent = data.label || "OK";
@@ -1065,8 +1106,7 @@
     var who = document.getElementById("who");
     who.hidden = false;
     who.textContent = "Gebucht. Fertig oder einfach weggehen.";
-    document.getElementById("account").hidden = true;
-    document.getElementById("account").innerHTML = "";
+    hidePrivateTimes();
     hidePin();
     document.getElementById("actionMenu").hidden = true;
     document.getElementById("btnFertig").hidden = false;
@@ -1126,6 +1166,11 @@
         onChip(code);
       });
     });
+    document.getElementById("btnMeineZeiten").addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      showMyTimes();
+    });
     document.getElementById("btnFertig").addEventListener("click", function (event) {
       event.preventDefault();
       idleScreen();
@@ -1135,6 +1180,11 @@
       if (event.key === "Escape") {
         event.preventDefault();
         idleScreen();
+        return;
+      }
+      if (event.key === "4" || event.key === "z" || event.key === "Z") {
+        event.preventDefault();
+        showMyTimes();
         return;
       }
       var map = { "1": "CLOCK_IN", k: "CLOCK_IN", K: "CLOCK_IN", "2": "CLOCK_OUT", g: "CLOCK_OUT", G: "CLOCK_OUT", "3": "APPOINTMENT", t: "APPOINTMENT", T: "APPOINTMENT" };

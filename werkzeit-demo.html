@@ -70,8 +70,7 @@
                 <input id="rfid" name="rfid_id" autocomplete="off" autofocus placeholder="Code, dann Enter">
                 <button class="btn accent kiosk-enter" type="submit">Enter</button>
                 <p class="kiosk-help">
-                    <strong>Code an der Tastatur, dann Enter.</strong> Danach öffnet sich nur dein Menü.<br>
-                    Überstunden und Resturlaub sieht nur, wer den Code eingegeben hat.
+                    <strong>Code an der Tastatur, dann Enter.</strong> Danach: Kommen, Gehen oder Termin.
                 </p>
             </div>
             <div id="actionMenu" hidden>
@@ -83,14 +82,16 @@
                 <div class="kiosk-actions">
                     <button class="btn" type="button" data-event="BREAK_START">Pause</button>
                     <button class="btn" type="button" data-event="BREAK_END">Pause Ende</button>
+                    <button class="btn" type="button" id="btnMeineZeiten">Meine Zeiten</button>
                 </div>
                 <div class="kiosk-account private" id="account" hidden></div>
-                <p class="kiosk-help">Nur du siehst die Zahlen unten. Fertig oder einfach weggehen – dann ist das Menü zu.</p>
+                <div class="kiosk-plan" id="plan" hidden></div>
+                <p class="kiosk-help">Zeiten, Resturlaub und Überstunden erst mit <strong>Meine Zeiten</strong>. Fertig oder einfach weggehen.</p>
             </div>
             <button class="btn" type="button" id="btnFertig" hidden>Fertig · Nächster</button>
         </form>
     </div>
 
-    <script src="js/werkzeit-demo.js?v=6"></script>
+    <script src="js/werkzeit-demo.js?v=7"></script>
 </body>
 </html>
