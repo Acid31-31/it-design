@@ -1,0 +1,130 @@
+[hidden] { display: none !important; }
+
+html, body.demo-body {
+  height: 100%;
+}
+
+body.demo-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.demo-bar {
+  flex-shrink: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 10px 16px;
+  background: #071018;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.demo-bar-lead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 220px;
+  flex: 1 1 240px;
+}
+
+.demo-bar-lead strong {
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.demo-bar-lead span,
+.demo-bar-codes {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.demo-bar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.demo-bar-actions .btn.active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
+.demo-bar-actions a {
+  color: var(--accent);
+  font-size: 13px;
+  text-decoration: none;
+  padding: 8px 4px;
+}
+
+.demo-bar-actions a:hover { text-decoration: underline; }
+
+#chefRoot {
+  flex: 1;
+  min-height: 0;
+}
+
+#kioskRoot {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+#kioskRoot.kiosk {
+  min-height: 0;
+}
+
+.mt { margin-top: 16px; }
+.punch-row { margin-top: 12px; justify-content: flex-start; }
+
+.demo-quick {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 720px;
+  margin-top: 4px;
+}
+
+.demo-quick button {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.demo-quick button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.excel-log {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.excel-log li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.excel-log .muted { font-size: 12px; }
+
+@media (max-width: 860px) {
+  .demo-bar { padding: 10px 12px; }
+}

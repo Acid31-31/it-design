@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; connect-src 'self' https://itdesigns-kruft.goatcounter.com https://gc.zgo.at; img-src 'self' https://itdesigns-kruft.goatcounter.com https://gc.zgo.at; media-src 'self'; style-src 'self'; font-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; worker-src 'none'">
+    <link rel="canonical" href="https://www.it-designs.de/werkzeit-demo.html">
+    <meta property="og:url" content="https://www.it-designs.de/werkzeit-demo.html">
+    <title>Werkzeit-Demo – Programm testen | IT Designs</title>
+    <meta name="description" content="Werkzeit im Browser testen: Stempeluhr mit Mitarbeitercode, Chef-PC mit Heute, Monat, Jahr, Urlaub und Excel. Testdaten, ohne Installation.">
+    <meta name="theme-color" content="#060A0E">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/werkzeit-app.css">
+    <link rel="stylesheet" href="css/werkzeit-demo.css">
+</head>
+<body class="demo-body">
+    <div class="demo-bar">
+        <div class="demo-bar-lead">
+            <strong>Vorschau zum Testen</strong>
+            <span>Testdaten im Browser. Nichts wird gespeichert, nichts wird gesendet.</span>
+            <span class="demo-bar-codes">Codes: 1001 Anna · 1002 Bernd · 1003 Clara · 1004 David · 1005 Eva</span>
+        </div>
+        <div class="demo-bar-actions">
+            <button type="button" class="btn accent" id="btnChef">Chef-PC</button>
+            <button type="button" class="btn" id="btnKiosk">Stempeluhr</button>
+            <button type="button" class="btn" id="btnReset">Demo zurücksetzen</button>
+            <a href="zeitstempel.html">Zur Beschreibung</a>
+        </div>
+    </div>
+
+    <div class="app-shell" id="chefRoot">
+        <header class="titlebar">
+            <div class="brand">
+                <div class="logo-cutout">
+                    <img src="images/zeitstempel/logo.png?v=3" alt="" class="brand-logo wordmark logo-shadow" aria-hidden="true">
+                    <img src="images/zeitstempel/logo.png?v=3" alt="Werkzeit – Kommen. Gehen. Fertig." class="brand-logo wordmark">
+                </div>
+            </div>
+            <div class="titlebar-center">
+                <span id="activeBadge" class="badge">Demo · Chef-PC</span>
+            </div>
+            <div class="titlebar-actions">
+                <button class="header-btn" type="button" id="btnOpenKiosk">Terminal</button>
+            </div>
+        </header>
+        <aside class="sidebar" id="sidebar"></aside>
+        <main class="content" id="content"></main>
+        <footer class="statusbar">
+            <span>Werkzeit Demo</span>
+            <span>Daten bleiben in diesem Browser-Tab. Keine Cloud.</span>
+        </footer>
+    </div>
+
+    <div class="kiosk" id="kioskRoot" hidden>
+        <p class="kiosk-link" id="serverHint">Demo · Stempeluhr</p>
+        <div class="logo-cutout">
+            <img src="images/zeitstempel/logo.png?v=3" alt="" class="brand-logo wordmark logo-shadow" aria-hidden="true">
+            <img src="images/zeitstempel/logo.png?v=3" alt="Werkzeit" class="brand-logo wordmark">
+        </div>
+        <h1 id="headline">Mitarbeitercode eingeben</h1>
+        <div class="kiosk-time-cutout">
+            <div class="kiosk-time-shadow" id="clockShadow" aria-hidden="true"></div>
+            <div class="kiosk-time" id="clock"></div>
+        </div>
+        <p class="kiosk-sub" id="subline" hidden></p>
+        <div class="kiosk-account" id="account" hidden></div>
+        <div class="kiosk-plan" id="plan" hidden></div>
+        <form class="kiosk-form" id="punchForm">
+            <p class="kiosk-who" id="who" hidden></p>
+            <input id="rfid" name="rfid_id" autocomplete="off" autofocus inputmode="numeric" placeholder="Code eingeben, dann Enter">
+            <div class="demo-quick" id="quickCodes"></div>
+            <div class="kiosk-actions">
+                <button class="btn" type="button" data-event="BREAK_START">Pause</button>
+                <button class="btn" type="button" data-event="BREAK_END">Pause Ende</button>
+                <button class="btn" type="button" data-event="APPOINTMENT" id="btnTermin">Termin</button>
+                <button class="btn accent" type="button" id="btnKonto">Mein Konto</button>
+                <button class="btn" type="button" id="btnFertig" hidden>Fertig · Nächster</button>
+            </div>
+            <p class="kiosk-help">
+                <strong>Code eintippen</strong> = Kommen oder Gehen. Der Kollege kann direkt danach stempeln.<br>
+                <strong>Mein Konto</strong> = erst diese Taste, dann Code. Zeigt Urlaub und Überstunden, ohne zu stempeln.<br>
+                Pause und Termin: Taste drücken, dann Code. Unten die Demo-Codes antippen geht auch.
+            </p>
+        </form>
+    </div>
+
+    <script src="js/werkzeit-demo.js?v=2"></script>
+</body>
+</html>
