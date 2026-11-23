@@ -48,7 +48,7 @@
     { id: "excel", label: "Excel" },
     { id: "settings", label: "Einstellungen" }
   ];
-  var STORE_KEY = "werkzeit-demo-v2";
+  var STORE_KEY = "werkzeit-demo-v3";
   var LABELS = {
     CLOCK_IN: "Kommen", CLOCK_OUT: "Gehen", BREAK_START: "Pause",
     BREAK_END: "Pause Ende", APPOINTMENT_START: "Termin", APPOINTMENT_END: "Wieder da"
@@ -197,7 +197,12 @@
         last_name: p.last_name,
         display_name: p.last_name + ", " + p.first_name,
         rfid_id: p.rfid_id,
-        excel_path: "C:\\Zeiterfassung\\Arbeitszeit-" + p.last_name + "-" + p.first_name + ".xlsx",
+        excel_file: "files/werkzeit/Arbeitszeit-" + (
+          { 1: "Mueller-Anna", 2: "Schmidt-Bernd", 3: "Weber-Clara", 4: "Hoffmann-David", 5: "Klein-Eva" }[p.id]
+        ) + ".xlsx",
+        excel_path: "C:\\Zeiterfassung\\Arbeitszeit-" + (
+          { 1: "Mueller-Anna", 2: "Schmidt-Bernd", 3: "Weber-Clara", 4: "Hoffmann-David", 5: "Klein-Eva" }[p.id]
+        ) + ".xlsx",
         vacation_total: p.vacation_total,
         vacation_taken: p.vacation_taken,
         opening: p.opening,
@@ -278,7 +283,7 @@
       debounce: 3,
       lastPunchAt: {},
       excelLog: [
-        { time: pad(now.getHours()) + ":" + pad(Math.max(0, now.getMinutes() - 8)), name: "Müller, Anna", label: "Kommen", file: "Arbeitszeit-Müller-Anna.xlsx" },
+        { time: pad(now.getHours()) + ":" + pad(Math.max(0, now.getMinutes() - 8)), name: "Müller, Anna", label: "Kommen", file: "Arbeitszeit-Mueller-Anna.xlsx" },
         { time: pad(now.getHours()) + ":" + pad(Math.max(0, now.getMinutes() - 6)), name: "Schmidt, Bernd", label: "Pause", file: "Arbeitszeit-Schmidt-Bernd.xlsx" },
         { time: pad(now.getHours()) + ":" + pad(Math.max(0, now.getMinutes() - 4)), name: "Klein, Eva", label: "Kommen", file: "Arbeitszeit-Klein-Eva.xlsx" }
       ],
@@ -797,13 +802,16 @@
   function viewEmployees() {
     var rows = state.employees.map(function (e) {
       var file = e.excel_path ? e.excel_path.split(/[/\\]/).pop() : "fehlt";
+      var open = e.excel_file
+        ? "<a class='btn' href='" + esc(e.excel_file) + "' download>Öffnen</a>"
+        : "";
       return "<tr><td>" + esc(e.personal_number) + "</td><td>" + esc(e.display_name) + "</td>" +
         "<td>" + esc(e.rfid_id || "") + "</td><td>" + esc(file) + "</td>" +
-        "<td><input type='text' data-emp='" + e.id + "' class='assignExcel' value='" + esc(file) + "'></td></tr>";
+        "<td>" + open + "</td></tr>";
     }).join("");
     var root = el(
       "<section><h1>Mitarbeiter anlegen</h1>" +
-      "<p class='muted'>Beim Anlegen die Excel dieser Person zuordnen. Jede Stempelung schreibt danach in genau diese Datei – in der echten App. Hier in der Demo erscheint der Schreibvorgang unter Excel.</p>" +
+      "<p class='muted'>Beim Anlegen die Excel dieser Person zuordnen. Jede Stempelung schreibt danach in genau diese Datei. In der Demo liegen echte .xlsx-Dateien zum Herunterladen.</p>" +
       "<form class='toolbar' id='newEmp'>" +
       "<label>Personalnr. <input name='personal_number' required></label>" +
       "<label>Vorname <input name='first_name' required></label>" +
@@ -811,7 +819,7 @@
       "<label>Code <input name='rfid_id' placeholder='z. B. 1006'></label>" +
       "<label>Excel-Datei <input name='excel_name' placeholder='Arbeitszeit-Name.xlsx'></label>" +
       "<button class='btn accent' type='submit'>Anlegen</button></form>" +
-      "<article class='card'><table><thead><tr><th>PNr</th><th>Name</th><th>Code</th><th>Excel</th><th>Excel zuordnen</th></tr></thead>" +
+      "<article class='card'><table><thead><tr><th>PNr</th><th>Name</th><th>Code</th><th>Excel</th><th>Datei</th></tr></thead>" +
       "<tbody>" + rows + "</tbody></table></article></section>"
     );
     root.querySelector("#newEmp").onsubmit = function (event) {
@@ -834,14 +842,6 @@
       saveState();
       show("employees");
     };
-    root.querySelectorAll(".assignExcel").forEach(function (input) {
-      input.onchange = function () {
-        var emp = empById(input.dataset.emp);
-        if (!emp) return;
-        emp.excel_path = "C:\\Zeiterfassung\\" + input.value.trim();
-        saveState();
-      };
-    });
     return root;
   }
 
@@ -851,22 +851,41 @@
       "</select></label>";
   }
 
+  function excelHref(emp) {
+    return (emp && emp.excel_file) || "files/werkzeit/Hoelzer-Alexander_Arbeitszeit-2026.xlsx";
+  }
+
   function viewExcel() {
     var log = state.excelLog.map(function (row) {
       return "<li><span>" + esc(row.time) + " · " + esc(row.name) + " · " + esc(row.label) +
         "</span><span class='muted'>" + esc(row.file) + "</span></li>";
     }).join("") || "<li class='muted'>Noch keine Stempelung in dieser Demo.</li>";
+    var files = state.employees.map(function (e) {
+      var file = e.excel_path ? e.excel_path.split(/[/\\]/).pop() : "fehlt";
+      return "<tr><td>" + esc(e.display_name) + "</td><td>" + esc(file) + "</td>" +
+        "<td><a class='btn accent' href='" + esc(excelHref(e)) + "' download>Excel öffnen</a></td></tr>";
+    }).join("");
     var root = el(
       "<section><h1>Excel</h1>" +
-      "<article class='card'><h3>Live in die Originaldatei</h3>" +
-      "<p class='muted'>Beim Anlegen die Excel der Person wählen. Danach schreibt jede Stempelung automatisch in genau diese Datei. Die Formeln (IST, SOLL, Überstunden) bleiben erhalten. In der Demo wird der Schreibvorgang nur angezeigt.</p>" +
+      "<article class='card'><h3>Original-Excel zum Testen</h3>" +
+      "<p class='muted'>Das ist die echte Arbeitszeit-Excel mit Formeln. Morgen herunterladen und in Excel öffnen. In der App schreibt jede Stempelung in genau diese Datei – IST, SOLL und Überstunden rechnen weiter.</p>" +
+      "<div class='toolbar'><a class='btn accent' href='files/werkzeit/Hoelzer-Alexander_Arbeitszeit-2026.xlsx' download>Meine Excel herunterladen</a></div></article>" +
+      "<article class='card mt'><h3>Excel der Mitarbeiter</h3>" +
+      "<p class='muted'>Jeder hat eine eigene Datei. Öffnen zeigt Kommt, Geht, Pause und die Formeln.</p>" +
+      "<table><thead><tr><th>Name</th><th>Datei</th><th></th></tr></thead><tbody>" + files + "</tbody></table></article>" +
+      "<article class='card mt'><h3>Vorschau November 2026</h3>" +
+      "<p class='muted'>Ausschnitt aus der Originaldatei. Die komplette Mappe mit allen Monaten liegt zum Download.</p>" +
+      "<div id='excelPreview' class='excel-preview'><p class='muted'>Vorschau wird geladen …</p></div></article>" +
+      "<article class='card mt'><h3>Live in die Originaldatei</h3>" +
+      "<p class='muted'>In der echten App schreibt jede Stempelung automatisch in die zugeordnete Excel. Hier siehst du den Vorgang und kannst die Datei danach öffnen.</p>" +
       "<p class='muted' id='excelPath'></p>" +
       "<div class='toolbar'>" + employeeSelect("emp") +
-      "<button class='btn accent' type='button' id='btnSync'>Jetzt in Original-Excel schreiben</button></div>" +
+      "<button class='btn accent' type='button' id='btnSync'>Jetzt in Original-Excel schreiben</button>" +
+      "<a class='btn' id='btnOpenExcel' href='files/werkzeit/Hoelzer-Alexander_Arbeitszeit-2026.xlsx' download>Datei öffnen</a></div>" +
       "<p class='muted' id='syncMsg'></p></article>" +
       "<article class='card mt'><h3>Zuletzt geschrieben</h3><ul class='excel-log'>" + log + "</ul></article>" +
       "<article class='card mt'><h3>Historische Datei importieren</h3>" +
-      "<p class='muted'>Nur zum ersten Einlesen alter Jahre. In der Demo ohne echte Datei.</p>" +
+      "<p class='muted'>Nur zum ersten Einlesen alter Jahre.</p>" +
       "<button class='btn accent' type='button' id='btnImport'>Beispielimport zeigen</button>" +
       "<p class='muted' id='importMsg'></p></article>" +
       "<article class='card mt'><h3>Mit Excel vergleichen</h3>" +
@@ -878,12 +897,14 @@
       document.getElementById("excelPath").textContent = emp && emp.excel_path
         ? "Original: " + emp.excel_path
         : "Keine Originaldatei zugeordnet.";
+      var open = document.getElementById("btnOpenExcel");
+      if (open) open.href = excelHref(emp);
     }
     queueMicrotask(refreshPath);
     root.querySelector("#emp").onchange = refreshPath;
     root.querySelector("#btnSync").onclick = function () {
       var emp = empById(document.getElementById("emp").value);
-      document.getElementById("syncMsg").textContent = "Demo: geschrieben nach " + (emp.excel_path || "Excel") + " – Formeln unverändert.";
+      document.getElementById("syncMsg").textContent = "Geschrieben nach " + (emp.excel_path || "Excel") + " – Formeln unverändert. Datei unten öffnen.";
     };
     root.querySelector("#btnImport").onclick = function () {
       document.getElementById("importMsg").textContent = "Demo: Jahr 2025, 248 Tage würden übernommen.";
@@ -891,6 +912,27 @@
     root.querySelector("#btnCompare").onclick = function () {
       document.getElementById("compareMsg").textContent = "Excel und Software stimmen überein.";
     };
+    fetch("files/werkzeit/vorschau-november.json")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var box = root.querySelector("#excelPreview");
+        if (!box) return;
+        if (!data || !data.rows) {
+          box.innerHTML = "<p class='muted'>Vorschau nicht geladen. Datei oben herunterladen.</p>";
+          return;
+        }
+        var body = data.rows.map(function (row) {
+          return "<tr><td>" + esc(row.day) + "</td><td>" + esc(row.kommt1) + "</td><td>" +
+            esc(row.geht1) + "</td><td>" + esc(row.pause) + "</td><td>" + esc(row.code) + "</td></tr>";
+        }).join("");
+        box.innerHTML = "<p class='muted'>" + esc(data.note || "") + "</p>" +
+          "<div class='excel-preview-scroll'><table><thead><tr><th>Tag</th><th>Kommt</th><th>Geht</th><th>Pause</th><th>Code</th></tr></thead><tbody>" +
+          body + "</tbody></table></div>";
+      })
+      .catch(function () {
+        var box = root.querySelector("#excelPreview");
+        if (box) box.innerHTML = "<p class='muted'>Vorschau nicht geladen. Datei oben herunterladen.</p>";
+      });
     return root;
   }
 

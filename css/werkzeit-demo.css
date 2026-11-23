@@ -146,6 +146,25 @@ body.demo-body {
 
 .excel-log .muted { font-size: 12px; }
 
+.excel-preview-scroll {
+  max-height: 360px;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+.excel-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.excel-preview th,
+.excel-preview td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
 @media (max-width: 860px) {
   .demo-bar { padding: 10px 12px; }
 }
