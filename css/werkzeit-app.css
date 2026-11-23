@@ -560,6 +560,28 @@ tr.person-row:hover td { background: #1A2836; }
   letter-spacing: 3px;
   caret-color: var(--accent);
 }
+.kiosk-enter {
+  min-width: 220px;
+  min-height: 52px;
+}
+.kiosk-menu {
+  max-width: 780px;
+  margin-top: 4px;
+}
+.kiosk-menu .btn {
+  min-width: 180px;
+  min-height: 68px;
+  font-size: 20px;
+}
+.kiosk-account.private {
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  width: min(520px, 92vw);
+}
+#btnFertig {
+  min-width: 220px;
+  min-height: 48px;
+  margin-top: 8px;
+}
 .kiosk-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; max-width: 720px; }
 .kiosk-actions .btn {
   min-width: 140px;

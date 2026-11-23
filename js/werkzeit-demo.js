@@ -62,7 +62,8 @@
   var lastPunchMsg = "";
   var screenMode = "chef";
   var pendingAction = null;
-  var viewingKonto = false;
+  var viewingMenu = false;
+  var flashChip = "";
   var resetTimer = null;
   var busy = false;
   var lastActivity = Date.now();
@@ -968,25 +969,47 @@
     sub.textContent = text;
   }
 
+  function pinVisible() {
+    var box = document.getElementById("pinBox");
+    return Boolean(box && !box.hidden);
+  }
+
+  function showPin() {
+    var box = document.getElementById("pinBox");
+    var menu = document.getElementById("actionMenu");
+    var input = document.getElementById("rfid");
+    if (box) box.hidden = false;
+    if (menu) menu.hidden = true;
+    if (input) input.hidden = false;
+  }
+
+  function hidePin() {
+    var box = document.getElementById("pinBox");
+    var input = document.getElementById("rfid");
+    if (box) box.hidden = true;
+    if (input) {
+      input.hidden = true;
+      input.value = "";
+    }
+  }
+
   function idleScreen() {
     holdScreen = false;
     clearTimeout(resetTimer);
     pendingAction = null;
-    viewingKonto = false;
+    viewingMenu = false;
+    flashChip = "";
     busy = false;
     document.getElementById("headline").textContent = "Mitarbeitercode eingeben";
     document.getElementById("headline").className = "";
     setSubline("");
     document.getElementById("account").hidden = true;
     document.getElementById("account").innerHTML = "";
-    document.getElementById("plan").hidden = true;
-    document.getElementById("plan").innerHTML = "";
     document.getElementById("who").hidden = true;
-    document.getElementById("rfid").hidden = false;
-    document.getElementById("rfid").value = "";
     document.getElementById("btnFertig").hidden = true;
-    document.getElementById("btnKonto").textContent = "Mein Konto";
     document.getElementById("btnTermin").textContent = "Termin";
+    showPin();
+    document.getElementById("rfid").value = "";
     document.getElementById("rfid").focus();
   }
 
@@ -995,107 +1018,85 @@
     document.getElementById("headline").className = "err";
     setSubline("Code noch einmal eingeben");
     document.getElementById("account").hidden = true;
-    document.getElementById("plan").hidden = true;
     document.getElementById("who").hidden = true;
-    document.getElementById("rfid").value = "";
     document.getElementById("btnFertig").hidden = true;
-    viewingKonto = false;
+    viewingMenu = false;
     pendingAction = null;
     holdScreen = false;
+    showPin();
+    document.getElementById("rfid").value = "";
     document.getElementById("rfid").focus();
     resetTimer = setTimeout(idleScreen, 4000);
   }
 
-  function briefNumbers(data) {
+  function privateNumbers(data) {
     var box = document.getElementById("account");
     box.hidden = false;
     box.innerHTML =
       "<article><div class='muted'>Überstunden</div><div class='kpi'>" + esc(data.balance) + "</div></article>" +
-      "<article><div class='muted'>Heute</div><div class='kpi'>" + esc(data.today_ist) + "</div></article>" +
-      "<article><div class='muted'>Urlaub Rest</div><div class='kpi'>" + esc(String(data.vacation_remaining)) + "</div></article>";
+      "<article><div class='muted'>Resturlaub</div><div class='kpi'>" + esc(String(data.vacation_remaining)) + "</div></article>";
+  }
+
+  function showMenu(emp) {
+    var data = accountData(emp);
+    viewingMenu = true;
+    pendingAction = null;
+    flashChip = emp.rfid_id || flashChip;
+    document.getElementById("headline").className = "";
+    document.getElementById("headline").textContent = emp.display_name;
+    setSubline(statusLabel(data.status).toUpperCase());
+    var who = document.getElementById("who");
+    who.hidden = false;
+    who.textContent = "Kommen, Gehen oder Termin. Die Zahlen unten siehst nur du.";
+    privateNumbers(data);
+    hidePin();
+    document.getElementById("actionMenu").hidden = false;
+    document.getElementById("btnFertig").hidden = false;
+    document.getElementById("btnTermin").textContent = data.status === "ON_APPOINTMENT" ? "Wieder da" : "Termin";
+    armIdleReturn();
   }
 
   function showPunchFlash(data) {
-    viewingKonto = false;
-    document.getElementById("plan").hidden = true;
+    viewingMenu = false;
+    flashChip = data.rfid_id || "";
     document.getElementById("headline").className = data.event_type === "CLOCK_OUT" ? "out" : "ok";
     document.getElementById("headline").textContent = data.label || "OK";
-    setSubline(data.employee.display_name + "  ·  " + data.time + "  ·  " + statusLabel(data.status).toUpperCase());
+    setSubline(data.employee.display_name + "  ·  " + data.time);
     var who = document.getElementById("who");
     who.hidden = false;
-    who.textContent = "Bleibt offen, solange du etwas machst. Sonst zurück zur Startseite.";
-    briefNumbers(data);
-    document.getElementById("btnFertig").hidden = false;
-    document.getElementById("btnTermin").textContent = data.status === "ON_APPOINTMENT" ? "Wieder da" : "Termin";
-    document.getElementById("rfid").value = "";
-    document.getElementById("rfid").focus();
-    armIdleReturn();
-  }
-
-  function showKontoView(emp) {
-    var data = accountData(emp);
-    viewingKonto = true;
-    pendingAction = null;
-    document.getElementById("headline").className = "";
-    document.getElementById("headline").textContent = emp.display_name;
-    setSubline(statusLabel(data.status).toUpperCase() + "  ·  Überstunden " + data.balance + "  ·  Urlaub Rest " + data.vacation_remaining);
-    var who = document.getElementById("who");
-    who.hidden = false;
-    who.textContent = "Nur anschauen. Fertig drücken, dann kann der Nächste stempeln.";
-    briefNumbers(data);
-    var days = data.vacation_days.length
-      ? data.vacation_days.map(function (d) { return "<li><span>" + germanDate(d.date) + "</span><strong>" + d.label + "</strong></li>"; }).join("")
-      : "<li>Kein Urlaub eingetragen</li>";
-    var kommt = [data.today_kommt, data.today_kommt2].filter(Boolean).join(" / ") || "–";
-    var geht = [data.today_geht, data.today_geht2].filter(Boolean).join(" / ") || "–";
-    var plan = document.getElementById("plan");
-    plan.hidden = false;
-    plan.innerHTML =
-      "<article><h3>Überstunden " + data.year + "</h3>" +
-      "<p>Übertrag <strong>" + data.opening + "</strong></p>" +
-      "<p>Aktuelles Konto <strong>" + data.closing + "</strong></p>" +
-      "<p>Heute +/- <strong>" + data.today_delta + "</strong></p>" +
-      "<p>Heute Kommt <strong>" + kommt + "</strong> · Geht <strong>" + geht + "</strong></p></article>" +
-      "<article><h3>Urlaub " + data.year + "</h3>" +
-      "<p>Anspruch " + data.vacation_total + " · genommen " + data.vacation_taken + " · Rest <strong>" + data.vacation_remaining + "</strong></p>" +
-      "<ul>" + days + "</ul></article>";
-    document.getElementById("btnFertig").hidden = false;
-    document.getElementById("rfid").value = "";
-    document.getElementById("rfid").focus();
-    armIdleReturn();
-  }
-
-  function waitForChip(action, title, hint) {
-    pendingAction = action;
-    viewingKonto = false;
-    document.getElementById("plan").hidden = true;
+    who.textContent = "Gebucht. Fertig oder einfach weggehen.";
     document.getElementById("account").hidden = true;
-    document.getElementById("headline").className = "";
-    document.getElementById("headline").textContent = title;
-    setSubline(hint);
-    document.getElementById("who").hidden = true;
+    document.getElementById("account").innerHTML = "";
+    hidePin();
+    document.getElementById("actionMenu").hidden = true;
     document.getElementById("btnFertig").hidden = false;
-    document.getElementById("rfid").value = "";
-    document.getElementById("rfid").focus();
     armIdleReturn();
   }
 
   function onChip(code) {
     var emp = empByCode(code);
     if (!emp) { showError("Unbekannter Code"); return; }
-    if (pendingAction === "konto") { showKontoView(emp); return; }
-    if (busy) return;
-    busy = true;
-    holdScreen = false;
-    try {
-      var result = punchEmployee(emp, pendingAction);
-      pendingAction = null;
-      if (result.ignored) { showError(result.ignore_reason); return; }
-      lastPunchMsg = result.employee.display_name + ": " + result.label + " um " + result.time;
-      showPunchFlash(result);
-    } finally {
-      busy = false;
+    if (pendingAction) {
+      if (busy) return;
+      busy = true;
+      holdScreen = false;
+      try {
+        var result = punchEmployee(emp, pendingAction);
+        pendingAction = null;
+        if (result.ignored) { showError(result.ignore_reason); return; }
+        lastPunchMsg = result.employee.display_name + ": " + result.label + " um " + result.time;
+        showPunchFlash(result);
+      } finally {
+        busy = false;
+      }
+      return;
     }
+    showMenu(emp);
+  }
+
+  function currentChip() {
+    var input = document.getElementById("rfid");
+    return ((input && input.value) || "").trim() || flashChip;
   }
 
   function bindKiosk() {
@@ -1105,8 +1106,8 @@
         event.preventDefault();
         event.stopPropagation();
       }
-      if (busy) return;
-      var code = (input.value || "").trim();
+      if (busy || viewingMenu) return;
+      var code = currentChip();
       if (code) onChip(code);
     }
     document.getElementById("punchForm").addEventListener("submit", submitCode);
@@ -1118,27 +1119,32 @@
     document.querySelectorAll("[data-event]").forEach(function (button) {
       button.addEventListener("click", function (event) {
         event.preventDefault();
-        var code = input.value.trim();
-        var action = button.dataset.event;
-        if (code) { pendingAction = action; onChip(code); return; }
-        var labels = {
-          BREAK_START: ["Pause", "Jetzt Code eingeben, dann startet die Pause."],
-          BREAK_END: ["Pause Ende", "Jetzt Code eingeben für Pause Ende."],
-          APPOINTMENT: ["Termin", "Jetzt Code eingeben für Termin."]
-        };
-        var pair = labels[action] || ["Taste", "Jetzt Code eingeben."];
-        waitForChip(action, pair[0], pair[1]);
+        event.stopPropagation();
+        var code = currentChip();
+        if (!code) return;
+        pendingAction = button.dataset.event;
+        onChip(code);
       });
-    });
-    document.getElementById("btnKonto").addEventListener("click", function (event) {
-      event.preventDefault();
-      var code = input.value.trim();
-      if (code) { pendingAction = "konto"; onChip(code); return; }
-      waitForChip("konto", "Mein Konto", "Jetzt Code eingeben. Es wird nicht gestempelt.");
     });
     document.getElementById("btnFertig").addEventListener("click", function (event) {
       event.preventDefault();
       idleScreen();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (!viewingMenu || busy) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        idleScreen();
+        return;
+      }
+      var map = { "1": "CLOCK_IN", k: "CLOCK_IN", K: "CLOCK_IN", "2": "CLOCK_OUT", g: "CLOCK_OUT", G: "CLOCK_OUT", "3": "APPOINTMENT", t: "APPOINTMENT", T: "APPOINTMENT" };
+      var action = map[event.key];
+      if (!action) return;
+      event.preventDefault();
+      var code = currentChip();
+      if (!code) return;
+      pendingAction = action;
+      onChip(code);
     });
     rebuildQuickCodes();
   }
