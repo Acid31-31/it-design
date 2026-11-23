@@ -73,7 +73,11 @@
     holdScreen = true;
     clearTimeout(resetTimer);
     resetTimer = setTimeout(function () {
-      if (!holdScreen) return;
+      if (!holdScreen || busy) return;
+      if ((document.getElementById("rfid").value || "").trim()) {
+        armIdleReturn();
+        return;
+      }
       idleScreen();
     }, IDLE_MS);
   }
@@ -1082,20 +1086,34 @@
     if (pendingAction === "konto") { showKontoView(emp); return; }
     if (busy) return;
     busy = true;
-    var result = punchEmployee(emp, pendingAction);
-    busy = false;
-    pendingAction = null;
-    if (result.ignored) { showError(result.ignore_reason); return; }
-    lastPunchMsg = result.employee.display_name + ": " + result.label + " um " + result.time;
-    showPunchFlash(result);
+    holdScreen = false;
+    try {
+      var result = punchEmployee(emp, pendingAction);
+      pendingAction = null;
+      if (result.ignored) { showError(result.ignore_reason); return; }
+      lastPunchMsg = result.employee.display_name + ": " + result.label + " um " + result.time;
+      showPunchFlash(result);
+    } finally {
+      busy = false;
+    }
   }
 
   function bindKiosk() {
     var input = document.getElementById("rfid");
-    document.getElementById("punchForm").addEventListener("submit", function (event) {
-      event.preventDefault();
-      var code = input.value.trim();
+    function submitCode(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      if (busy) return;
+      var code = (input.value || "").trim();
       if (code) onChip(code);
+    }
+    document.getElementById("punchForm").addEventListener("submit", submitCode);
+    input.addEventListener("keydown", function (event) {
+      var enter = event.key === "Enter" || event.code === "Enter" || event.code === "NumpadEnter";
+      if (!enter || event.repeat) return;
+      submitCode(event);
     });
     document.querySelectorAll("[data-event]").forEach(function (button) {
       button.addEventListener("click", function (event) {
@@ -1128,6 +1146,7 @@
   function rebuildQuickCodes() {
     var input = document.getElementById("rfid");
     var quick = document.getElementById("quickCodes");
+    if (!quick) return;
     quick.innerHTML = "";
     state.employees.filter(function (e) { return e.active !== 0 && e.rfid_id; }).forEach(function (e) {
       var btn = document.createElement("button");
@@ -1154,7 +1173,7 @@
     ["mousemove", "mousedown", "keydown", "scroll", "touchstart", "click"].forEach(function (name) {
       document.addEventListener(name, function () {
         lastActivity = Date.now();
-        if (holdScreen) armIdleReturn();
+        if (holdScreen && !busy) armIdleReturn();
       }, { passive: true });
     });
     bindKiosk();

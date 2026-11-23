@@ -81,6 +81,10 @@ body.demo-body {
   min-height: 0;
 }
 
+.kiosk-enter {
+  min-width: 220px;
+  min-height: 52px;
+}
 .mt { margin-top: 16px; }
 .punch-row { margin-top: 12px; justify-content: flex-start; }
 

@@ -68,8 +68,8 @@
         <div class="kiosk-plan" id="plan" hidden></div>
         <form class="kiosk-form" id="punchForm">
             <p class="kiosk-who" id="who" hidden></p>
-            <input id="rfid" name="rfid_id" autocomplete="off" autofocus inputmode="numeric" placeholder="Code eingeben, dann Enter">
-            <div class="demo-quick" id="quickCodes"></div>
+            <input id="rfid" name="rfid_id" autocomplete="off" autofocus placeholder="Code, dann Enter">
+            <button class="btn accent kiosk-enter" type="submit">Enter · Stempeln</button>
             <div class="kiosk-actions">
                 <button class="btn" type="button" data-event="BREAK_START">Pause</button>
                 <button class="btn" type="button" data-event="BREAK_END">Pause Ende</button>
@@ -78,13 +78,13 @@
                 <button class="btn" type="button" id="btnFertig" hidden>Fertig · Nächster</button>
             </div>
             <p class="kiosk-help">
-                <strong>Code eintippen</strong> = Kommen oder Gehen. Der Kollege kann direkt danach stempeln.<br>
+                <strong>Code an der Tastatur eingeben, dann Enter</strong> = Kommen oder Gehen. Ein Chip ist nicht nötig.<br>
                 <strong>Mein Konto</strong> = erst diese Taste, dann Code. Zeigt Urlaub und Überstunden, ohne zu stempeln.<br>
-                Pause und Termin: Taste drücken, dann Code. Unten die Demo-Codes antippen geht auch.
+                Pause und Termin: Taste drücken, dann Code.
             </p>
         </form>
     </div>
 
-    <script src="js/werkzeit-demo.js?v=4"></script>
+    <script src="js/werkzeit-demo.js?v=5"></script>
 </body>
 </html>
