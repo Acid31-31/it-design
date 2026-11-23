@@ -66,6 +66,17 @@
   var resetTimer = null;
   var busy = false;
   var lastActivity = Date.now();
+  var holdScreen = false;
+  var IDLE_MS = 25000;
+
+  function armIdleReturn() {
+    holdScreen = true;
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(function () {
+      if (!holdScreen) return;
+      idleScreen();
+    }, IDLE_MS);
+  }
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -927,6 +938,8 @@
       var input = document.getElementById("rfid");
       if (input) input.focus();
     } else {
+      holdScreen = false;
+      clearTimeout(resetTimer);
       chef.hidden = false;
       kiosk.hidden = true;
       btnKiosk.classList.remove("accent", "active");
@@ -952,6 +965,7 @@
   }
 
   function idleScreen() {
+    holdScreen = false;
     clearTimeout(resetTimer);
     pendingAction = null;
     viewingKonto = false;
@@ -983,6 +997,7 @@
     document.getElementById("btnFertig").hidden = true;
     viewingKonto = false;
     pendingAction = null;
+    holdScreen = false;
     document.getElementById("rfid").focus();
     resetTimer = setTimeout(idleScreen, 4000);
   }
@@ -1004,13 +1019,13 @@
     setSubline(data.employee.display_name + "  ·  " + data.time + "  ·  " + statusLabel(data.status).toUpperCase());
     var who = document.getElementById("who");
     who.hidden = false;
-    who.textContent = "Anzeige bleibt. Fertig drücken oder nächster Kollege stempelt direkt.";
+    who.textContent = "Bleibt offen, solange du etwas machst. Sonst zurück zur Startseite.";
     briefNumbers(data);
     document.getElementById("btnFertig").hidden = false;
     document.getElementById("btnTermin").textContent = data.status === "ON_APPOINTMENT" ? "Wieder da" : "Termin";
     document.getElementById("rfid").value = "";
     document.getElementById("rfid").focus();
-    clearTimeout(resetTimer);
+    armIdleReturn();
   }
 
   function showKontoView(emp) {
@@ -1043,7 +1058,7 @@
     document.getElementById("btnFertig").hidden = false;
     document.getElementById("rfid").value = "";
     document.getElementById("rfid").focus();
-    clearTimeout(resetTimer);
+    armIdleReturn();
   }
 
   function waitForChip(action, title, hint) {
@@ -1058,8 +1073,7 @@
     document.getElementById("btnFertig").hidden = false;
     document.getElementById("rfid").value = "";
     document.getElementById("rfid").focus();
-    clearTimeout(resetTimer);
-    resetTimer = setTimeout(idleScreen, 12000);
+    armIdleReturn();
   }
 
   function onChip(code) {
@@ -1138,7 +1152,10 @@
       location.reload();
     };
     ["mousemove", "mousedown", "keydown", "scroll", "touchstart", "click"].forEach(function (name) {
-      document.addEventListener(name, function () { lastActivity = Date.now(); }, { passive: true });
+      document.addEventListener(name, function () {
+        lastActivity = Date.now();
+        if (holdScreen) armIdleReturn();
+      }, { passive: true });
     });
     bindKiosk();
     tickClock();
