@@ -1004,14 +1004,13 @@
     setSubline(data.employee.display_name + "  ·  " + data.time + "  ·  " + statusLabel(data.status).toUpperCase());
     var who = document.getElementById("who");
     who.hidden = false;
-    who.textContent = "Nächster Kollege kann gleich stempeln";
+    who.textContent = "Anzeige bleibt. Fertig drücken oder nächster Kollege stempelt direkt.";
     briefNumbers(data);
-    document.getElementById("btnFertig").hidden = true;
+    document.getElementById("btnFertig").hidden = false;
     document.getElementById("btnTermin").textContent = data.status === "ON_APPOINTMENT" ? "Wieder da" : "Termin";
     document.getElementById("rfid").value = "";
     document.getElementById("rfid").focus();
     clearTimeout(resetTimer);
-    resetTimer = setTimeout(idleScreen, 4500);
   }
 
   function showKontoView(emp) {
@@ -1045,10 +1044,6 @@
     document.getElementById("rfid").value = "";
     document.getElementById("rfid").focus();
     clearTimeout(resetTimer);
-    resetTimer = setTimeout(function () {
-      if (Date.now() - lastActivity < 45000) { showKontoView(emp); return; }
-      idleScreen();
-    }, 20000);
   }
 
   function waitForChip(action, title, hint) {
